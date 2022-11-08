@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.Managers
 {
-	public class Raycaster : PersistentSingleton<Raycaster>
+	public class Raycaster : Singleton<Raycaster>
 	{
 		public static RaycastHit2D[] RaycastAll(Vector2 origin, Vector2 direction, float distance, string? layerMaskName = null)
 		{
