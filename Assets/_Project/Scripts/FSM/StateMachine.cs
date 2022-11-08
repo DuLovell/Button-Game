@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using _Project.Scripts.Attributes;
 using _Project.Scripts.Managers.Logger;
 using _Project.Scripts.Utilities;
 using JetBrains.Annotations;
-using Sirenix.OdinInspector;
 using UnityEngine;
 
 // Notes
@@ -24,8 +24,8 @@ namespace _Project.Scripts.FSM
    public abstract class StateMachine : MonoBehaviour, ICoroutineRunner
    {
       private static readonly ICustomLogger _logger = LoggerFactory.GetLogger<StateMachine>();
-
-      [Title("Current state")] [HideLabel] [DisplayAsString] [UsedImplicitly]
+      
+      [ReadOnlyInspector] [UsedImplicitly]
       [SerializeField] protected string? _currentStateName;
       
       private readonly Dictionary<Type, List<Transition>> _transitions = new Dictionary<Type, List<Transition>>();
