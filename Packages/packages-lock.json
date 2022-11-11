@@ -1,10 +1,11 @@
 {
   "dependencies": {
     "com.nbednyakov.fsm": {
-      "version": "file:C:/Unity Projects/finite-state-machine",
+      "version": "https://github.com/DuLovell/finite-state-machine.git",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "ea751f27e47bc1fd0943dfe88e03641fa60cfbfd"
     },
     "com.unity.collab-proxy": {
       "version": "1.17.2",
