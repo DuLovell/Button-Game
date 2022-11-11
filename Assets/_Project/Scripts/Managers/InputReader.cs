@@ -1,6 +1,5 @@
 using _Project.Scripts.Managers.Logger;
 using _Project.Scripts.Utilities;
-using FSM;
 using UnityEngine;
 
 namespace _Project.Scripts.Managers
@@ -8,9 +7,6 @@ namespace _Project.Scripts.Managers
     public class InputReader : Singleton<InputReader>
     {
         private static readonly ICustomLogger _logger = LoggerFactory.GetLogger<InputReader>();
-
-        public readonly EventObject OnTouchBegan = new();
-        public readonly EventObject OnTouchEnded = new();
 
         private void Update()
         {
@@ -23,13 +19,22 @@ namespace _Project.Scripts.Managers
             {
                 case TouchPhase.Began:
                     _logger.Debug("Touch began");
-                    OnTouchBegan.Invoke();
                     break;
                 case TouchPhase.Canceled or TouchPhase.Ended:
                     _logger.Debug("Touch ended or cancelled");
-                    OnTouchEnded.Invoke();
                     break;
             }
+        }
+
+        public bool TryGetTouch(out Touch touch)
+        {
+            if (Input.touches.Length == 0) {
+                touch = default;
+                return false;
+            }
+
+            touch = Input.GetTouch(0);
+            return true;
         }
     }
 }
