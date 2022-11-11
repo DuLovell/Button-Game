@@ -1,6 +1,6 @@
-using _Project.Scripts.FSM;
 using _Project.Scripts.MainButton.States;
 using _Project.Scripts.Managers;
+using FSM;
 
 namespace _Project.Scripts.MainButton
 {

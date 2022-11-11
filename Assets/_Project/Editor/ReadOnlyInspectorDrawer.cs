@@ -1,4 +1,4 @@
-using _Project.Scripts.Attributes;
+using FSM.Attributes;
 using UnityEditor;
 using UnityEngine;
 

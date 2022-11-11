@@ -1,5 +1,6 @@
 using _Project.Scripts.Managers.Logger;
 using _Project.Scripts.Utilities;
+using FSM;
 using UnityEngine;
 
 namespace _Project.Scripts.Managers

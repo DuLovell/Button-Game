@@ -1,5 +1,5 @@
 using System.Diagnostics.CodeAnalysis;
-using _Project.Scripts.FSM;
+using FSM;
 
 namespace _Project.Scripts.MainButton.States
 {
