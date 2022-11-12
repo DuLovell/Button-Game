@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentStateName: 
+  _model: {fileID: 11400000, guid: 8fe9183267be34f08abec6f0514e3355, type: 2}
 --- !u!114 &3957401708602886567
 MonoBehaviour:
   m_ObjectHideFlags: 0

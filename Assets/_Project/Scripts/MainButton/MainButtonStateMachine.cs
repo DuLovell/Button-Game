@@ -1,3 +1,4 @@
+using _Project.Scripts.MainButton.Data;
 using _Project.Scripts.MainButton.States;
 using _Project.Scripts.Managers;
 using FSM;
@@ -9,6 +10,9 @@ namespace _Project.Scripts.MainButton
     {
         private const string MAIN_BUTTON_LAYER_NAME = "MainButton";
 
+        [SerializeField] 
+        private MainButtonModel _model = null!;
+        
         private MainButtonAnimator _mainButtonAnimator = null!;
 
         private MainButtonPushState _pushState = null!;
@@ -31,7 +35,7 @@ namespace _Project.Scripts.MainButton
 
         private void ConfigureStates()
         {
-            _pushState = new MainButtonPushState(_mainButtonAnimator);
+            _pushState = new MainButtonPushState(_mainButtonAnimator, _model);
             _unpushState = new MainButtonUnpushState(_mainButtonAnimator);
         }
 
