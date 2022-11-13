@@ -1,39 +1,54 @@
-﻿using UnityEngine;
+﻿using System;
+using Animancer;
+using UnityEngine;
 
 namespace _Project.Scripts.Npc
 {
 	public class NpcAnimator : MonoBehaviour
 	{
-		private static readonly int _showHash = Animator.StringToHash("Show");
-		private static readonly int _hideHash = Animator.StringToHash("Hide");
-		private static readonly int _idleHash = Animator.StringToHash("Idle");
-		private static readonly int _explodeHash = Animator.StringToHash("Explode");
+		[SerializeField]
+		private AnimationClip _showAnimation = null!;
+		[SerializeField]
+		private AnimationClip _hideAnimation = null!;
+		[SerializeField]
+		private AnimationClip _idleAnimation = null!;
+		[SerializeField]
+		private AnimationClip _explodeAnimation = null!;
 		
-		private Animator _animator = null!;
+		private AnimancerComponent _animancer = null!;
 
-		public void PlayShow()
+		public void PlayShow(Action? onComplete = null)
 		{
-			_animator.CrossFade(_showHash, 0);
+			Play(_showAnimation, onComplete);
 		}
 
-		public void PlayHide()
+		public void PlayHide(Action? onComplete = null)
 		{
-			_animator.CrossFade(_hideHash, 0);
+			Play(_hideAnimation, onComplete);
 		}
 
-		public void PlayIdle()
+		public void PlayIdle(Action? onComplete = null)
 		{
-			_animator.CrossFade(_idleHash, 0);
+			Play(_idleAnimation, onComplete);
 		}
 
-		public void PlayExplode()
+		public void PlayExplode(Action? onComplete = null)
 		{
-			_animator.CrossFade(_explodeHash, 0);
+			Play(_explodeAnimation, onComplete);
 		}
 
 		private void Awake()
 		{
-			_animator = GetComponent<Animator>();
+			_animancer = GetComponent<AnimancerComponent>();
+		}
+
+		private void Play(AnimationClip clip, Action? onComplete)
+		{
+			AnimancerState state = _animancer.Play(clip);
+			state.Events.NormalizedEndTime = clip.length;
+			if (onComplete != null) {
+				state.Events.OnEnd = onComplete;
+			}
 		}
 	}
 }

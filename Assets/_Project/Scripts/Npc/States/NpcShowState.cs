@@ -15,9 +15,7 @@ namespace _Project.Scripts.Npc.States
 
 		public override void OnEnter()
 		{
-			//TODO Проигрывать анимацию показа
-			_npcAnimator.PlayShow();
-			OnShowAnimationEnded.Invoke();
+			_npcAnimator.PlayShow(() => OnShowAnimationEnded.Invoke());
 		}
 
 		public override void OnExit()
