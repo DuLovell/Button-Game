@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace _Project.Scripts
+namespace _Project.Scripts.Npc
 {
 	public class FloatingBehaviour : MonoBehaviour
 	{
