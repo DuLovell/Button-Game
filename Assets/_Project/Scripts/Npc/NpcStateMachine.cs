@@ -32,7 +32,7 @@ namespace _Project.Scripts.Npc
 
 		private void ConfigureStates()
 		{
-			_idleState = new NpcIdleState(_npcAnimator);
+			_idleState = new NpcIdleState(_npcAnimator, _miniGame);
 			_showState = new NpcShowState(_npcAnimator);
 			_hideState = new NpcHideState(_npcAnimator);
 			_explodeState = new NpcExplodeState(_npcAnimator);
