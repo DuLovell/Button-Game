@@ -16,7 +16,6 @@ namespace _Project.Scripts.MiniGame.States
 		public override void OnEnter()
 		{
 			_miniGameAnimator.PlayIdle();
-			_miniGame.StartGame();
 		}
 
 		public override void OnExit()

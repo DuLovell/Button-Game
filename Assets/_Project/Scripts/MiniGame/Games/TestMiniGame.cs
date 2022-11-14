@@ -1,13 +1,15 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace _Project.Scripts.MiniGame.Games
 {
 	public class TestMiniGame : MonoBehaviour, IMiniGame
 	{
-		private bool _isWin;
-		private bool _isLose;
-		private bool _isExplode;
-
+		public event Action? OnFinished;
+		public event Action? OnShowEnded;
+		
+		private MiniGameAnimator _miniGameAnimator = null!;
+		
 		public void StartGame()
 		{
 		}
@@ -18,28 +20,22 @@ namespace _Project.Scripts.MiniGame.Games
 
 		public bool CheckWin()
 		{
-			return _isWin;
+			return false;
 		}
 
 		public bool CheckLose()
 		{
-			return _isLose;
+			return false;
 		}
 
-		public bool CheckExplosion()
+		private void Awake()
 		{
-			return _isExplode;
+			_miniGameAnimator = GetComponent<MiniGameAnimator>();
 		}
 
-		private void Update()
+		private void Start()
 		{
-			if (Input.GetKeyDown(KeyCode.W)) {
-				_isWin = true;
-			} else if (Input.GetKeyDown(KeyCode.L)) {
-				_isLose = true;
-			} else if (Input.GetKeyDown(KeyCode.E)) {
-				_isExplode = true;
-			}
+			_miniGameAnimator.PlayShow(() => OnShowEnded?.Invoke());
 		}
 	}
 }
