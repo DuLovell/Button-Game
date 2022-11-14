@@ -1,12 +1,13 @@
 using _Project.Scripts.MainButton.Data;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.UI
 {
     public class PushCounter : MonoBehaviour
     {
-        [SerializeField] 
+        [Inject]
         private MainButtonModel _mainButtonModel = null!;
 
         private TextMeshProUGUI _counterText = null!;

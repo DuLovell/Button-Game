@@ -3,14 +3,17 @@ using _Project.Scripts.MainButton.States;
 using _Project.Scripts.Managers;
 using FSM;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.MainButton
 {
     public class MainButtonStateMachine : StateMachine
     {
         private const string MAIN_BUTTON_LAYER_NAME = "MainButton";
-
-        [SerializeField] 
+        
+        [Inject]
+        private InputReader _inputReader = null!;
+        [Inject]
         private MainButtonModel _model = null!;
         
         private MainButtonAnimator _mainButtonAnimator = null!;
@@ -41,7 +44,7 @@ namespace _Project.Scripts.MainButton
 
         private bool IsButtonTouched()
         {
-            if (!InputReader.Instance.TryGetTouch(out Touch touch)) {
+            if (!_inputReader.TryGetTouch(out Touch touch)) {
                 return false;
             }
             

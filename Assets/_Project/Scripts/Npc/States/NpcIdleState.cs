@@ -1,4 +1,5 @@
-﻿using FSM;
+﻿using _Project.Scripts.MiniGame;
+using FSM;
 
 namespace _Project.Scripts.Npc.States
 {

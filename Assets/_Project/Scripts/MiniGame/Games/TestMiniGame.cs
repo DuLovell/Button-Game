@@ -1,7 +1,6 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace _Project.Scripts
+namespace _Project.Scripts.MiniGame.Games
 {
 	public class TestMiniGame : MonoBehaviour, IMiniGame
 	{
