@@ -58,8 +58,8 @@ namespace _Project.Scripts.MiniGame
 
 		private void OnMiniGameShowEnded()
 		{
-			//TODO Показать обратный отсчет через UniTask (нужна такая панель)
-			//TODO Показать туториал во время отсчета, если он требуется
+			//TODO Ожидать нажатия на экран
+			//TODO Во время ожидания показать туториал, если он требуется
 			
 			
 			if (_currentMiniGame == null) {
