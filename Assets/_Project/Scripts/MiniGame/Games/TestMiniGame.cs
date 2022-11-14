@@ -18,16 +18,6 @@ namespace _Project.Scripts.MiniGame.Games
 		{
 		}
 
-		public bool CheckWin()
-		{
-			return false;
-		}
-
-		public bool CheckLose()
-		{
-			return false;
-		}
-
 		private void Awake()
 		{
 			_miniGameAnimator = GetComponent<MiniGameAnimator>();

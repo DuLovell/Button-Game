@@ -9,8 +9,5 @@ namespace _Project.Scripts.MiniGame
 		
 		void StartGame();
 		void StopGame();
-		
-		bool CheckWin();
-		bool CheckLose();
 	}
 }
