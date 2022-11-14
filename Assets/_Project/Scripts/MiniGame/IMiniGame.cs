@@ -7,6 +7,5 @@
 		
 		bool CheckWin();
 		bool CheckLose();
-		bool CheckExplosion();
 	}
 }

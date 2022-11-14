@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 4038117999562761072}
   - component: {fileID: 9508149239558563}
   m_Layer: 0
-  m_Name: Npc
+  m_Name: TestMiniGame
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -169,7 +169,6 @@ MonoBehaviour:
   _showAnimation: {fileID: 7400000, guid: 68f6a406db732f849b3a5a9c7d576116, type: 2}
   _hideAnimation: {fileID: 7400000, guid: 8c346abe4c36d424abf67c186f609da7, type: 2}
   _idleAnimation: {fileID: 7400000, guid: 16b7d06829f02b04d8a8dcd3ec6ae556, type: 2}
-  _explodeAnimation: {fileID: 7400000, guid: 7f405481cdc06ed4189e562d44b77eee, type: 2}
 --- !u!114 &4038117999562761072
 MonoBehaviour:
   m_ObjectHideFlags: 0

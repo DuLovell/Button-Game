@@ -2,9 +2,9 @@
 using Animancer;
 using UnityEngine;
 
-namespace _Project.Scripts.Npc
+namespace _Project.Scripts.MiniGame
 {
-	public class NpcAnimator : MonoBehaviour
+	public class MiniGameAnimator : MonoBehaviour
 	{
 		[SerializeField]
 		private AnimationClip _showAnimation = null!;
@@ -12,9 +12,7 @@ namespace _Project.Scripts.Npc
 		private AnimationClip _hideAnimation = null!;
 		[SerializeField]
 		private AnimationClip _idleAnimation = null!;
-		[SerializeField]
-		private AnimationClip _explodeAnimation = null!;
-		
+
 		private AnimancerComponent _animancer = null!;
 
 		public void PlayShow(Action? onComplete = null)
@@ -30,11 +28,6 @@ namespace _Project.Scripts.Npc
 		public void PlayIdle(Action? onComplete = null)
 		{
 			Play(_idleAnimation, onComplete);
-		}
-
-		public void PlayExplode(Action? onComplete = null)
-		{
-			Play(_explodeAnimation, onComplete);
 		}
 
 		private void Awake()

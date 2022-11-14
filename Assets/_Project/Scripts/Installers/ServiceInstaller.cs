@@ -1,5 +1,5 @@
 ﻿using _Project.Scripts.Managers;
-using _Project.Scripts.Npc;
+using _Project.Scripts.MiniGame;
 using Zenject;
 
 namespace _Project.Scripts.Installers
@@ -9,7 +9,7 @@ namespace _Project.Scripts.Installers
 		public override void InstallBindings()
 		{
 			Container.Bind<InputReader>().AsSingle();
-			Container.Bind<NpcFactory>().AsSingle();
+			Container.Bind<MiniGameFactory>().AsSingle();
 		}
 	}
 }
