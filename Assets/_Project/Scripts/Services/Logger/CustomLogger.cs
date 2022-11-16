@@ -1,7 +1,7 @@
 ﻿using System;
 using static UnityEngine.Debug;
 
-namespace _Project.Scripts.Managers.Logger
+namespace _Project.Scripts.Services.Logger
 {
 	public class CustomLogger : ICustomLogger
 	{

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace _Project.Scripts.MiniGame.Data
 {
@@ -7,5 +8,13 @@ namespace _Project.Scripts.MiniGame.Data
 	{
 		[field: SerializeField]
 		public Vector2 LaunchDelayRange { get; private set; }
+		
+		[field: SerializeField]
+		public List<GameObject> MiniGames { get; private set; } = null!;
+
+		public GameObject GetMiniGamePrefab(MiniGameType gameType)
+		{
+			return MiniGames.Find(miniGame => miniGame.GetComponent<IMiniGame>().GameType == gameType);
+		}
 	}
 }

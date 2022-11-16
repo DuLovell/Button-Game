@@ -9,5 +9,7 @@ namespace _Project.Scripts.MiniGame
 		
 		void StartGame();
 		void StopGame();
+
+		MiniGameType GameType { get; }
 	}
 }

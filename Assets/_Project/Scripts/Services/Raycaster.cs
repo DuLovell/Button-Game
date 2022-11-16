@@ -1,8 +1,9 @@
 ﻿using _Project.Scripts.Utilities;
 using UnityEngine;
+
 // ReSharper disable Unity.PreferNonAllocApi
 
-namespace _Project.Scripts.Managers
+namespace _Project.Scripts.Services
 {
 	public class Raycaster : Singleton<Raycaster>
 	{

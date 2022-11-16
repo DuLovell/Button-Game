@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _Project.Scripts.Managers.Logger
+namespace _Project.Scripts.Services.Logger
 {
 	public static class LoggerFactory
 	{

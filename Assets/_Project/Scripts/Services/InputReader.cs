@@ -1,8 +1,8 @@
-using _Project.Scripts.Managers.Logger;
+using _Project.Scripts.Services.Logger;
 using JetBrains.Annotations;
 using UnityEngine;
 
-namespace _Project.Scripts.Managers
+namespace _Project.Scripts.Services
 {
     [UsedImplicitly]
     public class InputReader

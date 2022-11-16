@@ -27,5 +27,10 @@ namespace _Project.Scripts.MiniGame.Games
 		{
 			_miniGameAnimator.PlayShow(() => OnShowEnded?.Invoke());
 		}
+
+		public MiniGameType GameType
+		{
+			get { return MiniGameType.FILL_WITHOUT_EXPLODE; }
+		}
 	}
 }

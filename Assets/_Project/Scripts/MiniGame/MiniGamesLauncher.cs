@@ -1,6 +1,6 @@
 ﻿using System;
-using _Project.Scripts.Managers.Logger;
 using _Project.Scripts.MiniGame.Data;
+using _Project.Scripts.Services.Logger;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -20,24 +20,23 @@ namespace _Project.Scripts.MiniGame
 		private DateTime _lastMiniGameFinishTime;
 		private DateTime _nextMiniGameStartTime;
 		private IMiniGame? _currentMiniGame;
+		private bool _miniGameStarted;
 
 		private void Start()
 		{
-			OnMiniGameFinished();
+			CalculateNextMiniGameTime();
 		}
 
 		private void Update()
 		{
-			if (_nextMiniGameStartTime < DateTime.Now) {
+			if (!_miniGameStarted && _nextMiniGameStartTime < DateTime.Now) {
 				StartMiniGame();
 			}
 		}
 
 		private void OnMiniGameFinished()
 		{
-			_lastMiniGameFinishTime = DateTime.Now;
-			_nextMiniGameStartTime = _lastMiniGameFinishTime.AddSeconds(Random.Range(_launcherDescriptor.LaunchDelayRange.x,
-			                                                                         _launcherDescriptor.LaunchDelayRange.y));
+			CalculateNextMiniGameTime();
 
 			if (_currentMiniGame == null) {
 				_logger.Warn("Current mini game is null");
@@ -46,14 +45,8 @@ namespace _Project.Scripts.MiniGame
 			_currentMiniGame.OnShowEnded -= OnMiniGameShowEnded;
 			_currentMiniGame.OnFinished -= OnMiniGameFinished;
 			_currentMiniGame = null;
-		}
-
-		private void StartMiniGame()
-		{
-			_currentMiniGame = _miniGameFactory.CreateMiniGame(MiniGameType.FILL_WITHOUT_EXPLODE);
-
-			_currentMiniGame.OnShowEnded += OnMiniGameShowEnded;
-			_currentMiniGame.OnFinished += OnMiniGameFinished;
+			
+			_miniGameStarted = false;
 		}
 
 		private void OnMiniGameShowEnded()
@@ -67,6 +60,22 @@ namespace _Project.Scripts.MiniGame
 				return;
 			}
 			_currentMiniGame.StartGame();
+		}
+
+		private void StartMiniGame()
+		{
+			_miniGameStarted = true;
+			_currentMiniGame = _miniGameFactory.CreateMiniGame(MiniGameType.FILL_WITHOUT_EXPLODE);
+
+			_currentMiniGame.OnShowEnded += OnMiniGameShowEnded;
+			_currentMiniGame.OnFinished += OnMiniGameFinished;
+		}
+
+		private void CalculateNextMiniGameTime()
+		{
+			_lastMiniGameFinishTime = DateTime.Now;
+			_nextMiniGameStartTime = _lastMiniGameFinishTime.AddSeconds(Random.Range(_launcherDescriptor.LaunchDelayRange.x,
+			                                                                         _launcherDescriptor.LaunchDelayRange.y));
 		}
 	}
 }

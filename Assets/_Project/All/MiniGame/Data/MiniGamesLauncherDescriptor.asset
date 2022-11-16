@@ -13,3 +13,5 @@ MonoBehaviour:
   m_Name: MiniGamesLauncherDescriptor
   m_EditorClassIdentifier: 
   <LaunchDelayRange>k__BackingField: {x: 30, y: 60}
+  <MiniGames>k__BackingField:
+  - {fileID: 4354314218922278778, guid: fe7fd527bc19946499bd40c7178e6654, type: 3}

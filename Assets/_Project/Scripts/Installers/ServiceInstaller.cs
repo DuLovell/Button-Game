@@ -1,5 +1,5 @@
-﻿using _Project.Scripts.Managers;
-using _Project.Scripts.MiniGame;
+﻿using _Project.Scripts.MiniGame;
+using _Project.Scripts.Services;
 using Zenject;
 
 namespace _Project.Scripts.Installers
@@ -8,6 +8,7 @@ namespace _Project.Scripts.Installers
 	{
 		public override void InstallBindings()
 		{
+			Container.Bind<AssetProvider>().AsSingle();
 			Container.Bind<InputReader>().AsSingle();
 			Container.Bind<MiniGameFactory>().AsSingle();
 		}
