@@ -1,18 +1,26 @@
 ﻿using System;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.MiniGame.Games
 {
 	public class TestMiniGameController : MonoBehaviour, IMiniGame
 	{
-		public event Action? OnFinished;
-		public event Action? OnShowEnded;
-		
+		[Inject]
+		private TestMiniGameLogic _miniGameLogic = null!;
+		[Inject]
+		private TestMiniGameMediator _miniGameMediator = null!;
+
 		private MiniGameAnimator _miniGameAnimator = null!;
 		
+		public event Action? OnFinished;
+		public event Action? OnShowEnded;
+
 		public void StartGame()
 		{
 			_miniGameAnimator.PlayIdle();
+			_miniGameMediator.Active();
+			_miniGameLogic.StartGame();
 		}
 
 		public void StopGame()

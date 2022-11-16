@@ -1,22 +1,23 @@
-﻿namespace _Project.Scripts.MiniGame.Games
+﻿using _Project.Scripts.MainButton;
+using Zenject;
+
+namespace _Project.Scripts.MiniGame.Games
 {
 	public class TestMiniGameMediator
 	{
-		private readonly TestMiniGameWorld _gameWorld;
+		[Inject]
+		private MainButtonController _mainButtonController = null!;
+		[Inject]
+		private TestMiniGameLogic _gameLogic = null!;
 
-		public TestMiniGameMediator(TestMiniGameWorld gameWorld)
-		{
-			_gameWorld = gameWorld;
-		}
-		
 		public void Active()
 		{
-			
+			_mainButtonController.OnButtonTouched.Event += _gameLogic.OnMainButtonPressed;
 		}
 
 		public void Deactivate()
 		{
-			
+			_mainButtonController.OnButtonTouched.Event -= _gameLogic.OnMainButtonPressed;
 		}
 	}
 }

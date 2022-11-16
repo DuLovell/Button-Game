@@ -20,8 +20,9 @@ namespace _Project.Scripts.MiniGame
 		public IMiniGame CreateMiniGame(MiniGameType gameType)
 		{
 			GameObject miniGamePrefab = _miniGamesLauncherDescriptor.GetMiniGamePrefab(gameType);
+			IMiniGame miniGameInstance = _assetProvider.CreateAsset<IMiniGame>(miniGamePrefab);
 			_logger.Debug($"MiniGame was created. type={gameType}");
-			return _assetProvider.CreateAsset<IMiniGame>(miniGamePrefab);
+			return miniGameInstance;
 		}
 	}
 }
