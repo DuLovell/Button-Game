@@ -167,6 +167,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _showAnimation: {fileID: 7400000, guid: 68f6a406db732f849b3a5a9c7d576116, type: 2}
   _hideAnimation: {fileID: 7400000, guid: 8c346abe4c36d424abf67c186f609da7, type: 2}
+  _waitStartAnimation: {fileID: 7400000, guid: 07ec92f9e0a7c9d4eb3e62fde48d1ba2, type: 2}
   _idleAnimation: {fileID: 7400000, guid: 16b7d06829f02b04d8a8dcd3ec6ae556, type: 2}
 --- !u!114 &9508149239558563
 MonoBehaviour:

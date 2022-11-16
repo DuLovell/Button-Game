@@ -1,6 +1,7 @@
 ﻿using System;
 using _Project.Scripts.MiniGame.Data;
 using _Project.Scripts.Services.Logger;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 using Random = UnityEngine.Random;
@@ -49,11 +50,11 @@ namespace _Project.Scripts.MiniGame
 			_miniGameStarted = false;
 		}
 
-		private void OnMiniGameShowEnded()
+		private async void OnMiniGameShowEnded()
 		{
 			//TODO Ожидать нажатия на экран
 			//TODO Во время ожидания показать туториал, если он требуется
-			
+			await UniTask.Delay(TimeSpan.FromSeconds(3), DelayType.DeltaTime);
 			
 			if (_currentMiniGame == null) {
 				_logger.Warn("Current mini game is null");

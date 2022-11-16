@@ -11,6 +11,8 @@ namespace _Project.Scripts.MiniGame
 		[SerializeField]
 		private AnimationClip _hideAnimation = null!;
 		[SerializeField]
+		private AnimationClip _waitStartAnimation = null!;
+		[SerializeField]
 		private AnimationClip _idleAnimation = null!;
 
 		private AnimancerComponent _animancer = null!;
@@ -23,6 +25,11 @@ namespace _Project.Scripts.MiniGame
 		public void PlayHide(Action? onComplete = null)
 		{
 			Play(_hideAnimation, onComplete);
+		}
+		
+		public void PlayWaitStart(Action? onComplete = null)
+		{
+			Play(_waitStartAnimation, onComplete);
 		}
 
 		public void PlayIdle(Action? onComplete = null)

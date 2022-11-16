@@ -662,6 +662,7 @@ GameObject:
   - component: {fileID: 2003540571}
   - component: {fileID: 2003540572}
   - component: {fileID: 2003540573}
+  - component: {fileID: 2003540574}
   m_Layer: 0
   m_Name: SceneContext
   m_TagString: Untagged
@@ -684,8 +685,9 @@ MonoBehaviour:
   _scriptableObjectInstallers: []
   _monoInstallers:
   - {fileID: 2003540571}
-  - {fileID: 2003540572}
   - {fileID: 2003540573}
+  - {fileID: 2003540572}
+  - {fileID: 2003540574}
   _installerPrefabs: []
   _autoRun: 1
   OnPreInstall:
@@ -756,6 +758,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _miniGamesLauncherDescriptor: {fileID: 11400000, guid: 6c8efec80f64fd3498b3c1c791d82211, type: 2}
+--- !u!114 &2003540574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2003540568}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b023ebb45de54062af4b48fb0b8250dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _mainButtonController: {fileID: 8990006777653252389}
 --- !u!1001 &7111947751697911236
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -870,3 +885,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f435f41e317904f408841a1b7d0aca15, type: 3}
+--- !u!114 &8990006777653252389 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8049342799266730309, guid: f435f41e317904f408841a1b7d0aca15, type: 3}
+  m_PrefabInstance: {fileID: 8990006777653252388}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29aa7c788d674a5d8727d9b9ab7e87c1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,3 +1,4 @@
+using System;
 using _Project.Scripts.MainButton.Data;
 using _Project.Scripts.MainButton.States;
 using _Project.Scripts.Services;
@@ -9,13 +10,10 @@ namespace _Project.Scripts.MainButton
 {
     public class MainButtonStateMachine : StateMachine
     {
-        private const string MAIN_BUTTON_LAYER_NAME = "MainButton";
-        
-        [Inject]
-        private InputReader _inputReader = null!;
         [Inject]
         private MainButtonModel _model = null!;
-        
+
+        private MainButtonController _mainButtonController = null!;
         private MainButtonAnimator _mainButtonAnimator = null!;
 
         private MainButtonPushState _pushState = null!;
@@ -23,12 +21,13 @@ namespace _Project.Scripts.MainButton
 
         private void Awake()
         {
+            _mainButtonController = GetComponent<MainButtonController>();
             _mainButtonAnimator = GetComponent<MainButtonAnimator>();
 
             ConfigureStates();
 			
-            AddTransition(_unpushState, _pushState, IsButtonTouched);
-            AddTransition(_pushState, _unpushState, () => !IsButtonTouched());
+            AddTransition(_unpushState, _pushState, _mainButtonController.OnButtonTouched);
+            AddTransition(_pushState, _unpushState, _mainButtonController.OnButtonUntouched);
         }
 
         private void Start()
@@ -40,16 +39,6 @@ namespace _Project.Scripts.MainButton
         {
             _pushState = new MainButtonPushState(_mainButtonAnimator, _model);
             _unpushState = new MainButtonUnpushState(_mainButtonAnimator);
-        }
-
-        private bool IsButtonTouched()
-        {
-            if (!_inputReader.TryGetTouch(out Touch touch)) {
-                return false;
-            }
-            
-            Ray ray = Camera.main.ScreenPointToRay(touch.position);
-            return Physics.Raycast(ray, Mathf.Infinity, LayerMask.GetMask(MAIN_BUTTON_LAYER_NAME));
         }
     }
 }

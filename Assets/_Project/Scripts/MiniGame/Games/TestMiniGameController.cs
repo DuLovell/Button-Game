@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace _Project.Scripts.MiniGame.Games
 {
-	public class TestMiniGame : MonoBehaviour, IMiniGame
+	public class TestMiniGameController : MonoBehaviour, IMiniGame
 	{
 		public event Action? OnFinished;
 		public event Action? OnShowEnded;
@@ -12,6 +12,7 @@ namespace _Project.Scripts.MiniGame.Games
 		
 		public void StartGame()
 		{
+			_miniGameAnimator.PlayIdle();
 		}
 
 		public void StopGame()
@@ -25,7 +26,10 @@ namespace _Project.Scripts.MiniGame.Games
 
 		private void Start()
 		{
-			_miniGameAnimator.PlayShow(() => OnShowEnded?.Invoke());
+			_miniGameAnimator.PlayShow(() => {
+				_miniGameAnimator.PlayWaitStart();
+				OnShowEnded?.Invoke();
+			});
 		}
 
 		public MiniGameType GameType
