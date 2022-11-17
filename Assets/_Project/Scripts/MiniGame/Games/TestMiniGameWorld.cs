@@ -1,22 +1,10 @@
-﻿using JetBrains.Annotations;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace _Project.Scripts.MiniGame.Games
 {
-	[UsedImplicitly]
-	public class TestMiniGameWorld
+	public class TestMiniGameWorld : MonoBehaviour
 	{
-		private TestMiniGameCube? _cube;
-
-		public TestMiniGameCube Cube
-		{
-			get
-			{
-				if (_cube == null) {
-					_cube = Object.FindObjectOfType<TestMiniGameCube>();
-				}
-				return _cube;
-			}
-		}
+		[field: SerializeField]
+		public TestMiniGameCube Cube { get; private set; } = null!;
 	}
 }

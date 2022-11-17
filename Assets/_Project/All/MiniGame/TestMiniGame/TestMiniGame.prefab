@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 964234375740935511}
   - component: {fileID: 274927854659337227}
   - component: {fileID: 9508149239558563}
+  - component: {fileID: 8695623501146209645}
   m_Layer: 0
   m_Name: TestMiniGame
   m_TagString: Untagged
@@ -194,3 +195,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b65d8ad2a1004d95905f33c931592ee7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &8695623501146209645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4354314218922278778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3d2a6a9305e45f69dd2c4039063fad6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <Cube>k__BackingField: {fileID: 4017791476826619457}

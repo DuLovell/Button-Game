@@ -12,7 +12,6 @@ namespace _Project.Scripts.Installers
 		public override void InstallBindings()
 		{
 			Container.Bind<TestMiniGameDescriptor>().FromInstance(_miniGameDescriptor).AsSingle();
-			Container.Bind<TestMiniGameWorld>().AsSingle();
 			Container.Bind<TestMiniGameLogic>().AsSingle();
 			Container.Bind<TestMiniGameMediator>().AsSingle();
 		}

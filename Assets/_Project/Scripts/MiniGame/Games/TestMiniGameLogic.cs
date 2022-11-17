@@ -3,6 +3,7 @@ using System.Threading;
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
 using Zenject;
+using Object = UnityEngine.Object;
 
 namespace _Project.Scripts.MiniGame.Games
 {
@@ -10,17 +11,17 @@ namespace _Project.Scripts.MiniGame.Games
 	public class TestMiniGameLogic
 	{
 		[Inject]
-		private TestMiniGameWorld _gameWorld = null!;
-		[Inject]
 		private TestMiniGameDescriptor _gameDescriptor = null!;
 
 		public event Action<bool>? OnGameFinished;
 
+		private TestMiniGameWorld _gameWorld = null!;
 		private CancellationTokenSource? _cancelToken;
 		private int _tapCounter;
 
 		public void StartGame()
 		{
+			_gameWorld = Object.FindObjectOfType<TestMiniGameWorld>();
 			_cancelToken = new CancellationTokenSource();
 			_tapCounter = 0;
 
