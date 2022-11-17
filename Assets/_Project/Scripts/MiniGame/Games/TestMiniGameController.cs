@@ -67,7 +67,7 @@ namespace _Project.Scripts.MiniGame.Games
 		private void HideGame()
 		{
 			_logger.Debug($"Will hide mini game. type={GameType}");
-			_miniGameAnimator.PlayHide();
+			_miniGameAnimator.PlayHide(() => Destroy(gameObject));
 		}
 
 		public MiniGameType GameType
