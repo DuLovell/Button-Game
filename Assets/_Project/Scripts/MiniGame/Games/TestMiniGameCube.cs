@@ -21,7 +21,7 @@ namespace _Project.Scripts.MiniGame.Games
 		private IEnumerator RotatingRoutine()
 		{
 			while (true) {
-				transform.Rotate(_directionModifier * new Vector3(0f, 0.5f, 0f), Space.Self);
+				transform.Rotate(_directionModifier * new Vector3(0f, 100f, 0f) * Time.deltaTime, Space.Self);
 				yield return null;
 			}
 		}
