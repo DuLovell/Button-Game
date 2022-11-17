@@ -8,7 +8,8 @@ namespace _Project.Scripts.Services
 	[UsedImplicitly]
 	public class AssetProvider
 	{
-		private SceneContext? _sceneContext;
+		[Inject]
+		private DiContainer _diContainer = null!;
 
 		public T CreateAsset<T>(Object prefab)
 		{
@@ -19,10 +20,7 @@ namespace _Project.Scripts.Services
 
 		private void InjectSceneContext<T>(T instance)
 		{
-			if (_sceneContext == null) {
-				_sceneContext = Object.FindObjectOfType<SceneContext>();
-			}
-			_sceneContext.Container.Inject(instance!);
+			_diContainer.Inject(instance!);
 		}
 	}
 }
