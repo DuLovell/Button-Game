@@ -5,12 +5,19 @@ namespace _Project.Scripts.MiniGame.Games
 {
 	public class TestMiniGameCube : MonoBehaviour
 	{
-		private float _directionModifier;
+		private Coroutine _rotateCoroutine = null!;
 		
+		private float _directionModifier;
+
 		public void StartRotating()
 		{
 			_directionModifier = 1f;
-			StartCoroutine(RotatingRoutine());
+			_rotateCoroutine = StartCoroutine(RotatingRoutine());
+		}
+
+		public void StopRotating()
+		{
+			StopCoroutine(_rotateCoroutine);
 		}
 
 		public void InverseRotationDirection()
