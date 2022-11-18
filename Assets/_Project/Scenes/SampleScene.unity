@@ -539,6 +539,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _miniGameDescriptor: {fileID: 11400000, guid: da04b6cf3e16a154982e90c5f714eedd, type: 2}
+  _miniGameViewPrefab: {fileID: 5091231241372433685, guid: ef588118fabe97e418955b4568bcc696, type: 3}
 --- !u!114 &2003540576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,7 +552,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf9942cfb0e840ca84606299445f9f7f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hud: {fileID: 6269983470785775465, guid: e01fd9975a1f41943a8fd8819c703e87, type: 3}
+  _hudPrefab: {fileID: 6269983470785775465, guid: e01fd9975a1f41943a8fd8819c703e87, type: 3}
 --- !u!1001 &7111947751697911236
 PrefabInstance:
   m_ObjectHideFlags: 0

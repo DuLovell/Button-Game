@@ -9,13 +9,16 @@ namespace _Project.Scripts.Installers
 	{
 		[SerializeField]
 		private TestMiniGameDescriptor _miniGameDescriptor = null!;
-		
+		[SerializeField]
+		private TestMiniGameView _miniGameViewPrefab = null!;
+
 		public override void InstallBindings()
 		{
 			Container.Bind<TestMiniGameDescriptor>().FromInstance(_miniGameDescriptor).AsSingle();
 			Container.Bind<TestMiniGameModel>().AsSingle();
 			Container.Bind<TestMiniGameLogic>().AsSingle();
 			Container.Bind<TestMiniGameMediator>().AsSingle();
+			Container.Bind<TestMiniGameView>().FromComponentInNewPrefab(_miniGameViewPrefab).AsTransient();
 		}
 	}
 }

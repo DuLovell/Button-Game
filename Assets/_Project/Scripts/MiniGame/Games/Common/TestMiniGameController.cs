@@ -12,12 +12,10 @@ namespace _Project.Scripts.MiniGame.Games.Common
 	{
 		private static readonly ICustomLogger _logger = LoggerFactory.GetLogger<TestMiniGameController>();
 
-		[SerializeField]
-		private TestMiniGameView _miniGameViewPrefab = null!;
+		[Inject]
+		private TestMiniGameView _miniGameView = null!;
 		[Inject]
 		private Canvas _hud = null!;
-		[Inject]
-		private AssetProvider _assetProvider = null!;
 		[Inject]
 		private TestMiniGameLogic _miniGameLogic = null!;
 		[Inject]
@@ -28,13 +26,11 @@ namespace _Project.Scripts.MiniGame.Games.Common
 		public event Action<bool>? OnFinished;
 		
 		private MiniGameAnimator _miniGameAnimator = null!;
-		private TestMiniGameView _miniGameView = null!;
 
 		private void Awake()
 		{
 			_miniGameAnimator = GetComponent<MiniGameAnimator>();
 			
-			_miniGameView = _assetProvider.CreateAsset<TestMiniGameView>(_miniGameViewPrefab);
 			_miniGameView.transform.SetParent(_hud.transform);
 		}
 
