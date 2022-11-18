@@ -1,8 +1,10 @@
 ﻿using _Project.Scripts.MainButton;
+using JetBrains.Annotations;
 using Zenject;
 
-namespace _Project.Scripts.MiniGame.Games
+namespace _Project.Scripts.MiniGame.Games.Common
 {
+	[UsedImplicitly]
 	public class TestMiniGameMediator
 	{
 		[Inject]

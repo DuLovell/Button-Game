@@ -1,32 +1,46 @@
 ﻿using System;
+using _Project.Scripts.Services;
 using _Project.Scripts.Services.Logger;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 
-namespace _Project.Scripts.MiniGame.Games
+namespace _Project.Scripts.MiniGame.Games.Common
 {
 	//TODO Сделать все инжекты интерфейсами, а этот класс сделать абстрактным
 	public class TestMiniGameController : MonoBehaviour, IMiniGame
 	{
 		private static readonly ICustomLogger _logger = LoggerFactory.GetLogger<TestMiniGameController>();
-		
+
+		[SerializeField]
+		private TestMiniGameView _miniGameViewPrefab = null!;
+		[Inject]
+		private Canvas _hud = null!;
+		[Inject]
+		private AssetProvider _assetProvider = null!;
 		[Inject]
 		private TestMiniGameLogic _miniGameLogic = null!;
 		[Inject]
 		private TestMiniGameMediator _miniGameMediator = null!;
+		[Inject]
+		private TestMiniGameModel _miniGameModel = null!;
 
 		public event Action<bool>? OnFinished;
 		
 		private MiniGameAnimator _miniGameAnimator = null!;
+		private TestMiniGameView _miniGameView = null!;
 
 		private void Awake()
 		{
 			_miniGameAnimator = GetComponent<MiniGameAnimator>();
+			
+			_miniGameView = _assetProvider.CreateAsset<TestMiniGameView>(_miniGameViewPrefab);
+			_miniGameView.transform.SetParent(_hud.transform);
 		}
 
 		private void Start()
 		{
+			_miniGameModel.Reset();
 			_logger.Debug($"Will show mini game. type={GameType}");
 			_miniGameAnimator.PlayShow(OnMiniGameShowEnded);
 		}
@@ -67,7 +81,10 @@ namespace _Project.Scripts.MiniGame.Games
 		private void HideGame()
 		{
 			_logger.Debug($"Will hide mini game. type={GameType}");
-			_miniGameAnimator.PlayHide(() => Destroy(gameObject));
+			_miniGameAnimator.PlayHide(() => {
+				Destroy(_miniGameView.gameObject);
+				Destroy(gameObject);
+			});
 		}
 
 		public MiniGameType GameType

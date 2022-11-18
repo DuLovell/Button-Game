@@ -13,14 +13,8 @@ namespace _Project.Scripts.Services
 
 		public T CreateAsset<T>(Object prefab)
 		{
-			T instance = Object.Instantiate(prefab).GetComponent<T>();
-			InjectSceneContext(instance);
+			T instance = _diContainer.InstantiatePrefab(prefab).GetComponent<T>();
 			return instance;
-		}
-
-		private void InjectSceneContext<T>(T instance)
-		{
-			_diContainer.Inject(instance!);
 		}
 	}
 }

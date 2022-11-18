@@ -12,18 +12,18 @@ namespace _Project.Scripts.MiniGame.Games
 	{
 		[Inject]
 		private TestMiniGameDescriptor _gameDescriptor = null!;
+		[Inject]
+		private TestMiniGameModel _gameModel = null!;
 
 		public event Action<bool>? OnGameFinished;
 
 		private TestMiniGameWorld _gameWorld = null!;
 		private CancellationTokenSource? _cancelToken;
-		private int _tapCounter;
 
 		public void StartGame()
 		{
 			_gameWorld = Object.FindObjectOfType<TestMiniGameWorld>();
 			_cancelToken = new CancellationTokenSource();
-			_tapCounter = 0;
 
 			Cube.StartRotating();
 			CheckLoseAsync().Forget();
@@ -31,7 +31,7 @@ namespace _Project.Scripts.MiniGame.Games
 
 		public void OnMainButtonPressed()
 		{
-			_tapCounter++;
+			_gameModel.TapCount++;
 			CheckWin();
 			Cube.InverseRotationDirection();
 		}
@@ -56,7 +56,7 @@ namespace _Project.Scripts.MiniGame.Games
 
 		private void CheckWin()
 		{
-			if (_tapCounter < _gameDescriptor.TapsToWin) {
+			if (_gameModel.TapCount < _gameDescriptor.TapsToWin) {
 				return;
 			}
 			StopGame(true);
