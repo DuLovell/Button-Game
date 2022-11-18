@@ -6,11 +6,11 @@ namespace _Project.Scripts.Installers
 	public class UiInstaller : MonoInstaller
 	{
 		[SerializeField]
-		private Canvas _hud = null!;
+		private Canvas _hudPrefab = null!;
 		
 		public override void InstallBindings()
 		{
-			Container.Bind<Canvas>().FromInstance(_hud);
+			Container.Bind<Canvas>().FromComponentInNewPrefab(_hudPrefab).AsSingle();
 		}
 	}
 }
