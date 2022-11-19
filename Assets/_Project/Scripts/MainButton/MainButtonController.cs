@@ -18,6 +18,16 @@ namespace _Project.Scripts.MainButton
 
 		private bool _isTouched;
 
+		public bool IsButtonTouched()
+		{
+			if (!_inputReader.TryGetTouch(out Touch touch)) {
+				return false;
+			}
+            
+			Ray ray = Camera.main.ScreenPointToRay(touch.position);
+			return Physics.Raycast(ray, Mathf.Infinity, LayerMask.GetMask(MAIN_BUTTON_LAYER_NAME));
+		}
+
 		private void Update()
 		{
 			if (!_isTouched && IsButtonTouched()) {
@@ -27,16 +37,6 @@ namespace _Project.Scripts.MainButton
 				OnButtonUntouched.Invoke();
 				_isTouched = false;
 			}
-		}
-
-		private bool IsButtonTouched()
-		{
-			if (!_inputReader.TryGetTouch(out Touch touch)) {
-				return false;
-			}
-            
-			Ray ray = Camera.main.ScreenPointToRay(touch.position);
-			return Physics.Raycast(ray, Mathf.Infinity, LayerMask.GetMask(MAIN_BUTTON_LAYER_NAME));
 		}
 	}
 }

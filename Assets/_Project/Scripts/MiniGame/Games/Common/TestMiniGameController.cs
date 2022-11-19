@@ -1,4 +1,7 @@
 ﻿using System;
+using _Project.Scripts.MainButton;
+using _Project.Scripts.MiniGame.Games.Ui;
+using _Project.Scripts.Services;
 using _Project.Scripts.Services.Logger;
 using _Project.Scripts.UI;
 using Cysharp.Threading.Tasks;
@@ -12,9 +15,7 @@ namespace _Project.Scripts.MiniGame.Games.Common
 	public class TestMiniGameController : MonoBehaviour, IMiniGame
 	{
 		private static readonly ICustomLogger _logger = LoggerFactory.GetLogger<TestMiniGameController>();
-
-		[Inject]
-		private TestMiniGameView _miniGameView = null!;
+		
 		[Inject]
 		private HudController _hud = null!;
 		[Inject]
@@ -23,6 +24,12 @@ namespace _Project.Scripts.MiniGame.Games.Common
 		private TestMiniGameMediator _miniGameMediator = null!;
 		[Inject]
 		private TestMiniGameModel _miniGameModel = null!;
+		[Inject]
+		private TestMiniGameView _miniGameView = null!;
+		[Inject]
+		private TestMiniGameReadyOverlay _miniGameReadyOverlay = null!;
+		[Inject]
+		private MainButtonController _mainButtonController = null!;
 
 		public event Action<bool>? OnFinished;
 		
@@ -31,8 +38,6 @@ namespace _Project.Scripts.MiniGame.Games.Common
 		private void Awake()
 		{
 			_miniGameAnimator = GetComponent<MiniGameAnimator>();
-			
-			_miniGameView.transform.SetParent(_hud.transform);
 		}
 
 		private void Start()
@@ -40,18 +45,19 @@ namespace _Project.Scripts.MiniGame.Games.Common
 			_miniGameModel.Reset();
 			_logger.Debug($"Will show mini game. type={GameType}");
 			_miniGameAnimator.PlayShow()
-			                 .Then(OnMiniGameShowEnded)
+			                 .Then(() => OnMiniGameShowEndedAsync().Forget())
 			                 .Done();
 		}
 
-		private async void OnMiniGameShowEnded()
+		private async UniTaskVoid OnMiniGameShowEndedAsync()
 		{
 			_miniGameAnimator.PlayWaitStart();
 			
-			//TODO Ожидать нажатия на экран
 			//TODO Во время ожидания показать туториал, если он требуется
-			await UniTask.Delay(TimeSpan.FromSeconds(3), DelayType.DeltaTime);
-			
+			await _miniGameReadyOverlay.ShowAsync();
+			/*await UniTask.WaitUntil(_mainButtonController.IsButtonTouched);
+			_miniGameReadyOverlay.Hide();*/
+
 			StartGame();
 		}
 
@@ -84,6 +90,7 @@ namespace _Project.Scripts.MiniGame.Games.Common
 			return _miniGameAnimator.PlayHide()
 			                        .Then(() => {
 				                        Destroy(_miniGameView.gameObject);
+				                        Destroy(_miniGameReadyOverlay.gameObject);
 				                        Destroy(gameObject);
 			                        });
 		}

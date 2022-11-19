@@ -2,7 +2,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace _Project.Scripts.MiniGame.Games
+namespace _Project.Scripts.MiniGame.Games.Ui
 {
 	public class TestMiniGameView : MonoBehaviour
 	{
