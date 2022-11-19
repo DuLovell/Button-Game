@@ -5,7 +5,7 @@ using Zenject;
 
 namespace _Project.Scripts.MiniGame.Games.Ui
 {
-	public class TestMiniGameReadyOverlay : View
+	public class ReadyOverlay : View
 	{
 		[Inject]
 		private MainButtonController _mainButtonController = null!;

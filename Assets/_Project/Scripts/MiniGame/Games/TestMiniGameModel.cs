@@ -1,9 +1,10 @@
-﻿using JetBrains.Annotations;
+﻿using _Project.Scripts.MiniGame.Common;
+using JetBrains.Annotations;
 
 namespace _Project.Scripts.MiniGame.Games
 {
 	[UsedImplicitly]
-	public class TestMiniGameModel
+	public class TestMiniGameModel : IMiniGameModel
 	{
 		public int TapCount;
 

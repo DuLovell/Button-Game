@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using _Project.Scripts.MiniGame.Common;
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
 using Zenject;
@@ -8,7 +9,7 @@ using Object = UnityEngine.Object;
 namespace _Project.Scripts.MiniGame.Games
 {
 	[UsedImplicitly]
-	public class TestMiniGameLogic
+	public class TestMiniGameLogic : IMiniGameLogic
 	{
 		[Inject]
 		private TestMiniGameDescriptor _gameDescriptor = null!;

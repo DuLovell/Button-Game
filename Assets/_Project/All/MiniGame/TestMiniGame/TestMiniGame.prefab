@@ -108,7 +108,7 @@ GameObject:
   - component: {fileID: 5648504333033576302}
   - component: {fileID: 964234375740935511}
   - component: {fileID: 274927854659337227}
-  - component: {fileID: 9508149239558563}
+  - component: {fileID: 6684355789658733243}
   - component: {fileID: 8695623501146209645}
   m_Layer: 0
   m_Name: TestMiniGame
@@ -183,7 +183,7 @@ MonoBehaviour:
   _hideAnimation: {fileID: 7400000, guid: 8c346abe4c36d424abf67c186f609da7, type: 2}
   _waitStartAnimation: {fileID: 7400000, guid: 07ec92f9e0a7c9d4eb3e62fde48d1ba2, type: 2}
   _idleAnimation: {fileID: 7400000, guid: 16b7d06829f02b04d8a8dcd3ec6ae556, type: 2}
---- !u!114 &9508149239558563
+--- !u!114 &6684355789658733243
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -192,10 +192,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 4354314218922278778}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b65d8ad2a1004d95905f33c931592ee7, type: 3}
+  m_Script: {fileID: 11500000, guid: 80e8dea236544adb8bea5d62d936f0ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _miniGameViewPrefab: {fileID: 5091231241372433685, guid: ef588118fabe97e418955b4568bcc696, type: 3}
 --- !u!114 &8695623501146209645
 MonoBehaviour:
   m_ObjectHideFlags: 0

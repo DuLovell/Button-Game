@@ -1,16 +1,22 @@
-﻿using _Project.Scripts.UI;
+﻿using _Project.Scripts.MiniGame.Common;
+using _Project.Scripts.UI;
 using TMPro;
 using UnityEngine;
 using Zenject;
 
 namespace _Project.Scripts.MiniGame.Games.Ui
 {
-	public class TestMiniGameView : View
+	public class TestMiniGameView : View, IMiniGameView
 	{
 		[SerializeField]
 		private TextMeshProUGUI _tapCounterTextMesh = null!;
 		[Inject]
 		private TestMiniGameModel _gameModel = null!;
+
+		public void DestroyView()
+		{
+			Destroy(gameObject);
+		}
 
 		private void Update()
 		{

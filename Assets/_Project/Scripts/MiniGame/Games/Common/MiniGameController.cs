@@ -1,4 +1,5 @@
 ﻿using System;
+using _Project.Scripts.MiniGame.Common;
 using _Project.Scripts.MiniGame.Games.Ui;
 using _Project.Scripts.Services.Logger;
 using Cysharp.Threading.Tasks;
@@ -8,21 +9,20 @@ using IPromise = RSG.IPromise;
 
 namespace _Project.Scripts.MiniGame.Games.Common
 {
-	//TODO Сделать все инжекты интерфейсами, а этот класс сделать абстрактным
-	public class TestMiniGameController : MonoBehaviour, IMiniGame
+	public abstract class MiniGameController : MonoBehaviour, IMiniGame
 	{
-		private static readonly ICustomLogger _logger = LoggerFactory.GetLogger<TestMiniGameController>();
+		private static readonly ICustomLogger _logger = LoggerFactory.GetLogger<MiniGameController>();
 		
 		[Inject]
-		private TestMiniGameLogic _miniGameLogic = null!;
+		protected IMiniGameLogic _miniGameLogic = null!;
 		[Inject]
-		private TestMiniGameMediator _miniGameMediator = null!;
+		protected IMiniGameMediator _miniGameMediator = null!;
 		[Inject]
-		private TestMiniGameModel _miniGameModel = null!;
+		protected IMiniGameModel _miniGameModel = null!;
 		[Inject]
-		private TestMiniGameView _miniGameView = null!;
+		protected IMiniGameView _miniGameView = null!;
 		[Inject]
-		private TestMiniGameReadyOverlay _miniGameReadyOverlay = null!;
+		private ReadyOverlay _miniGameReadyOverlay = null!;
 
 		public event Action<bool>? OnFinished;
 		
@@ -65,7 +65,7 @@ namespace _Project.Scripts.MiniGame.Games.Common
 		private void StartGame()
 		{
 			_miniGameAnimator.PlayIdle();
-			_miniGameMediator.Active();
+			_miniGameMediator.Activate();
 			
 			_miniGameLogic.StartGame();
 			_miniGameLogic.OnGameFinished += OnGameFinished;
@@ -78,15 +78,15 @@ namespace _Project.Scripts.MiniGame.Games.Common
 			_logger.Debug($"Will hide mini game. type={GameType}");
 			return _miniGameAnimator.PlayHide()
 			                        .Then(() => {
-				                        Destroy(_miniGameView.gameObject);
+				                        _miniGameView.DestroyView();
 				                        Destroy(_miniGameReadyOverlay.gameObject);
 				                        Destroy(gameObject);
 			                        });
 		}
 
-		public MiniGameType GameType
+		public abstract MiniGameType GameType
 		{
-			get { return MiniGameType.FILL_WITHOUT_EXPLODE; }
+			get;
 		}
 	}
 }
