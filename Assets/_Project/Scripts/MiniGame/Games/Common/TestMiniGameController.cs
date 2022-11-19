@@ -1,6 +1,7 @@
 ﻿using System;
 using _Project.Scripts.Services;
 using _Project.Scripts.Services.Logger;
+using _Project.Scripts.UI;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -15,7 +16,7 @@ namespace _Project.Scripts.MiniGame.Games.Common
 		[Inject]
 		private TestMiniGameView _miniGameView = null!;
 		[Inject]
-		private Canvas _hud = null!;
+		private HudController _hud = null!;
 		[Inject]
 		private TestMiniGameLogic _miniGameLogic = null!;
 		[Inject]
@@ -56,8 +57,8 @@ namespace _Project.Scripts.MiniGame.Games.Common
 		{
 			_logger.Debug($"Mini game finished. type={GameType}, win={win}");
 
-			HideGame();
 			_miniGameMediator.Deactivate();
+			HideGame();
 			OnFinished?.Invoke(win);
 
 			_miniGameLogic.OnGameFinished -= OnGameFinished;

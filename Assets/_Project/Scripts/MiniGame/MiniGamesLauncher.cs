@@ -16,6 +16,8 @@ namespace _Project.Scripts.MiniGame
 		private MiniGamesLauncherDescriptor _launcherDescriptor = null!;
 		[Inject]
 		private MiniGameFactory _miniGameFactory = null!;
+
+		public event Action<IMiniGame>? OnMiniGameLaunched;
 		
 		private DateTime _lastMiniGameFinishTime;
 		private DateTime _nextMiniGameStartTime;
@@ -30,7 +32,7 @@ namespace _Project.Scripts.MiniGame
 		private void Update()
 		{
 			if (!_miniGameStarted && _nextMiniGameStartTime < DateTime.Now) {
-				StartMiniGame();
+				LaunchMiniGame();
 			}
 		}
 
@@ -48,10 +50,11 @@ namespace _Project.Scripts.MiniGame
 			_miniGameStarted = false;
 		}
 
-		private void StartMiniGame()
+		private void LaunchMiniGame()
 		{
 			_miniGameStarted = true;
 			_currentMiniGame = _miniGameFactory.CreateMiniGame(MiniGameType.FILL_WITHOUT_EXPLODE);
+			OnMiniGameLaunched?.Invoke(_currentMiniGame);
 
 			_currentMiniGame.OnFinished += OnMiniGameFinished;
 		}
