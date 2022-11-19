@@ -147,6 +147,7 @@ GameObject:
   - component: {fileID: 1198069606297049347}
   - component: {fileID: 7188482306334056601}
   - component: {fileID: 5091231241372433685}
+  - component: {fileID: 5400075676211777635}
   m_Layer: 5
   m_Name: TestMiniGameView
   m_TagString: Untagged
@@ -226,3 +227,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _tapCounterTextMesh: {fileID: 7741773736854161850}
+--- !u!114 &5400075676211777635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8508447406582733368}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 486979b5af074501a121ac5a7253a8bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

@@ -1,10 +1,11 @@
-﻿using TMPro;
+﻿using _Project.Scripts.UI;
+using TMPro;
 using UnityEngine;
 using Zenject;
 
 namespace _Project.Scripts.MiniGame.Games.Ui
 {
-	public class TestMiniGameView : MonoBehaviour
+	public class TestMiniGameView : View
 	{
 		[SerializeField]
 		private TextMeshProUGUI _tapCounterTextMesh = null!;

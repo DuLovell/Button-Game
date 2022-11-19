@@ -4,7 +4,7 @@ using Zenject;
 
 namespace _Project.Scripts.UI
 {
-	public class GameView : MonoBehaviour
+	public class GameView : View
 	{
 		
 	}

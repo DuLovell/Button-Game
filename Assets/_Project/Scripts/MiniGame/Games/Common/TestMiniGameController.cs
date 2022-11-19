@@ -1,9 +1,6 @@
 ﻿using System;
-using _Project.Scripts.MainButton;
 using _Project.Scripts.MiniGame.Games.Ui;
-using _Project.Scripts.Services;
 using _Project.Scripts.Services.Logger;
-using _Project.Scripts.UI;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
@@ -17,8 +14,6 @@ namespace _Project.Scripts.MiniGame.Games.Common
 		private static readonly ICustomLogger _logger = LoggerFactory.GetLogger<TestMiniGameController>();
 		
 		[Inject]
-		private HudController _hud = null!;
-		[Inject]
 		private TestMiniGameLogic _miniGameLogic = null!;
 		[Inject]
 		private TestMiniGameMediator _miniGameMediator = null!;
@@ -28,8 +23,6 @@ namespace _Project.Scripts.MiniGame.Games.Common
 		private TestMiniGameView _miniGameView = null!;
 		[Inject]
 		private TestMiniGameReadyOverlay _miniGameReadyOverlay = null!;
-		[Inject]
-		private MainButtonController _mainButtonController = null!;
 
 		public event Action<bool>? OnFinished;
 		
@@ -52,12 +45,8 @@ namespace _Project.Scripts.MiniGame.Games.Common
 		private async UniTaskVoid OnMiniGameShowEndedAsync()
 		{
 			_miniGameAnimator.PlayWaitStart();
-			
 			//TODO Во время ожидания показать туториал, если он требуется
 			await _miniGameReadyOverlay.ShowAsync();
-			/*await UniTask.WaitUntil(_mainButtonController.IsButtonTouched);
-			_miniGameReadyOverlay.Hide();*/
-
 			StartGame();
 		}
 

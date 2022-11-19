@@ -1,12 +1,11 @@
-﻿using System;
-using _Project.Scripts.MainButton;
+﻿using _Project.Scripts.MainButton;
+using _Project.Scripts.UI;
 using Cysharp.Threading.Tasks;
-using UnityEngine;
 using Zenject;
 
 namespace _Project.Scripts.MiniGame.Games.Ui
 {
-	public class TestMiniGameReadyOverlay : MonoBehaviour
+	public class TestMiniGameReadyOverlay : View
 	{
 		[Inject]
 		private MainButtonController _mainButtonController = null!;
@@ -17,15 +16,15 @@ namespace _Project.Scripts.MiniGame.Games.Ui
 			await UniTask.WaitUntil(_mainButtonController.IsButtonTouched);
 			Hide();
 		}
-
-		public void Hide()
-		{
-			gameObject.SetActive(false);
-		}
 		
 		private void Awake()
 		{
 			Hide();
+		}
+		
+		private void Hide()
+		{
+			gameObject.SetActive(false);
 		}
 	}
 }
