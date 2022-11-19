@@ -1,5 +1,5 @@
-﻿using System;
-using Animancer;
+﻿using Animancer;
+using RSG;
 using UnityEngine;
 
 namespace _Project.Scripts.MiniGame
@@ -17,24 +17,24 @@ namespace _Project.Scripts.MiniGame
 
 		private AnimancerComponent _animancer = null!;
 
-		public void PlayShow(Action? onComplete = null)
+		public IPromise PlayShow()
 		{
-			Play(_showAnimation, onComplete);
+			return Play(_showAnimation);
 		}
 
-		public void PlayHide(Action? onComplete = null)
+		public IPromise PlayHide()
 		{
-			Play(_hideAnimation, onComplete);
+			return Play(_hideAnimation);
 		}
 		
-		public void PlayWaitStart(Action? onComplete = null)
+		public void PlayWaitStart()
 		{
-			Play(_waitStartAnimation, onComplete);
+			Play(_waitStartAnimation, true).Done();
 		}
 
-		public void PlayIdle(Action? onComplete = null)
+		public void PlayIdle()
 		{
-			Play(_idleAnimation, onComplete);
+			Play(_idleAnimation, true).Done();
 		}
 
 		private void Awake()
@@ -42,13 +42,15 @@ namespace _Project.Scripts.MiniGame
 			_animancer = GetComponent<AnimancerComponent>();
 		}
 
-		private void Play(AnimationClip clip, Action? onComplete)
+		private IPromise Play(AnimationClip clip, bool looping = false)
 		{
 			AnimancerState state = _animancer.Play(clip);
 			state.Events.NormalizedEndTime = clip.length;
-			if (onComplete != null) {
-				state.Events.OnEnd = onComplete;
+			Promise promise = new();
+			if (!looping) {
+				state.Events.OnEnd = () => promise.Resolve();
 			}
+			return promise;
 		}
 	}
 }

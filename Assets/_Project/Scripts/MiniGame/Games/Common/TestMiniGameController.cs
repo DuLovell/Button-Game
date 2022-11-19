@@ -1,10 +1,10 @@
 ﻿using System;
-using _Project.Scripts.Services;
 using _Project.Scripts.Services.Logger;
 using _Project.Scripts.UI;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
+using IPromise = RSG.IPromise;
 
 namespace _Project.Scripts.MiniGame.Games.Common
 {
@@ -39,7 +39,9 @@ namespace _Project.Scripts.MiniGame.Games.Common
 		{
 			_miniGameModel.Reset();
 			_logger.Debug($"Will show mini game. type={GameType}");
-			_miniGameAnimator.PlayShow(OnMiniGameShowEnded);
+			_miniGameAnimator.PlayShow()
+			                 .Then(OnMiniGameShowEnded)
+			                 .Done();
 		}
 
 		private async void OnMiniGameShowEnded()
@@ -58,10 +60,11 @@ namespace _Project.Scripts.MiniGame.Games.Common
 			_logger.Debug($"Mini game finished. type={GameType}, win={win}");
 
 			_miniGameMediator.Deactivate();
-			HideGame();
-			OnFinished?.Invoke(win);
-
-			_miniGameLogic.OnGameFinished -= OnGameFinished;
+			HideGame().Then(() => {
+				          OnFinished?.Invoke(win);
+				          _miniGameLogic.OnGameFinished -= OnGameFinished;
+			          })
+			          .Done();
 		}
 
 		private void StartGame()
@@ -75,13 +78,14 @@ namespace _Project.Scripts.MiniGame.Games.Common
 			_logger.Debug($"Mini game started. type={GameType}");
 		}
 
-		private void HideGame()
+		private IPromise HideGame()
 		{
 			_logger.Debug($"Will hide mini game. type={GameType}");
-			_miniGameAnimator.PlayHide(() => {
-				Destroy(_miniGameView.gameObject);
-				Destroy(gameObject);
-			});
+			return _miniGameAnimator.PlayHide()
+			                        .Then(() => {
+				                        Destroy(_miniGameView.gameObject);
+				                        Destroy(gameObject);
+			                        });
 		}
 
 		public MiniGameType GameType
