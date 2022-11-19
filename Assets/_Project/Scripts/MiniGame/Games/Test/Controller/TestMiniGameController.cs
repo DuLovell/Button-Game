@@ -1,6 +1,6 @@
-﻿using _Project.Scripts.MiniGame.Games.Common;
+﻿using _Project.Scripts.MiniGame.Common;
 
-namespace _Project.Scripts.MiniGame.Games
+namespace _Project.Scripts.MiniGame.Games.Test
 {
 	public class TestMiniGameController : MiniGameController
 	{

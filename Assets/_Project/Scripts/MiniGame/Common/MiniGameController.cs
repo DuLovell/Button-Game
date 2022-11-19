@@ -1,13 +1,12 @@
 ﻿using System;
-using _Project.Scripts.MiniGame.Common;
-using _Project.Scripts.MiniGame.Games.Ui;
 using _Project.Scripts.Services.Logger;
+using _Project.Scripts.UI;
 using Cysharp.Threading.Tasks;
 using UnityEngine;
 using Zenject;
 using IPromise = RSG.IPromise;
 
-namespace _Project.Scripts.MiniGame.Games.Common
+namespace _Project.Scripts.MiniGame.Common
 {
 	public abstract class MiniGameController : MonoBehaviour, IMiniGame
 	{

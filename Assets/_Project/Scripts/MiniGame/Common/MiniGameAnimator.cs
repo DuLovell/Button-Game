@@ -2,7 +2,7 @@
 using RSG;
 using UnityEngine;
 
-namespace _Project.Scripts.MiniGame
+namespace _Project.Scripts.MiniGame.Common
 {
 	public class MiniGameAnimator : MonoBehaviour
 	{

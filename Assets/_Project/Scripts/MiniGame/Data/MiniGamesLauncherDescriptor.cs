@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using _Project.Scripts.MiniGame.Common;
 using UnityEngine;
 
 namespace _Project.Scripts.MiniGame.Data

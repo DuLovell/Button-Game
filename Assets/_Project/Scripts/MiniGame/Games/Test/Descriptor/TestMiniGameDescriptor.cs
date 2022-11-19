@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace _Project.Scripts.MiniGame.Games
+namespace _Project.Scripts.MiniGame.Games.Test
 {
 	[CreateAssetMenu(fileName = "TestMiniGameDescriptor", menuName = "Data/MiniGames/Test/Descriptor", order = 0)]
 	public class TestMiniGameDescriptor : ScriptableObject

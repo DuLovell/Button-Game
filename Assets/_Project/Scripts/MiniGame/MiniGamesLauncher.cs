@@ -1,4 +1,5 @@
 ﻿using System;
+using _Project.Scripts.MiniGame.Common;
 using _Project.Scripts.MiniGame.Data;
 using _Project.Scripts.Services.Logger;
 using UnityEngine;

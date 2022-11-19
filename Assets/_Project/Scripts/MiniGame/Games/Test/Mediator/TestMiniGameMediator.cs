@@ -3,7 +3,7 @@ using _Project.Scripts.MiniGame.Common;
 using JetBrains.Annotations;
 using Zenject;
 
-namespace _Project.Scripts.MiniGame.Games.Common
+namespace _Project.Scripts.MiniGame.Games.Test
 {
 	[UsedImplicitly]
 	public class TestMiniGameMediator : IMiniGameMediator

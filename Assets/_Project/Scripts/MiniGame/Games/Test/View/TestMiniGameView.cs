@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using Zenject;
 
-namespace _Project.Scripts.MiniGame.Games.Ui
+namespace _Project.Scripts.MiniGame.Games.Test
 {
 	public class TestMiniGameView : View, IMiniGameView
 	{

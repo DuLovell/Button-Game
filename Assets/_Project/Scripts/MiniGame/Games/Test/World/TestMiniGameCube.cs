@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace _Project.Scripts.MiniGame.Games
+namespace _Project.Scripts.MiniGame.Games.Test
 {
 	public class TestMiniGameCube : MonoBehaviour
 	{

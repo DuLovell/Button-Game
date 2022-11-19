@@ -6,7 +6,7 @@ using JetBrains.Annotations;
 using Zenject;
 using Object = UnityEngine.Object;
 
-namespace _Project.Scripts.MiniGame.Games
+namespace _Project.Scripts.MiniGame.Games.Test
 {
 	[UsedImplicitly]
 	public class TestMiniGameLogic : IMiniGameLogic

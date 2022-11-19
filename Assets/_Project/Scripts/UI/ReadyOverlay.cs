@@ -1,9 +1,8 @@
 ﻿using _Project.Scripts.MainButton;
-using _Project.Scripts.UI;
 using Cysharp.Threading.Tasks;
 using Zenject;
 
-namespace _Project.Scripts.MiniGame.Games.Ui
+namespace _Project.Scripts.UI
 {
 	public class ReadyOverlay : View
 	{

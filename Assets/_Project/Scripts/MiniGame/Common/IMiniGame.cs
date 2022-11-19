@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace _Project.Scripts.MiniGame
+namespace _Project.Scripts.MiniGame.Common
 {
 	public interface IMiniGame
 	{

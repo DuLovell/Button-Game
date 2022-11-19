@@ -1,4 +1,5 @@
 ﻿using _Project.Scripts.MiniGame;
+using _Project.Scripts.MiniGame.Common;
 using UnityEngine;
 using Zenject;
 
