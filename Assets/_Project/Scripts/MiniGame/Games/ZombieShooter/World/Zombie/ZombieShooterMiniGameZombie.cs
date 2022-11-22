@@ -10,12 +10,12 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie
         [SerializeField] 
         private ZombieShooterMiniGameZombieBody _body = null!;
         
-        public static event Action<bool>? OnAnyKilled; // bool - хедшот или нет
+        public event Action<bool>? OnKilled; // bool - хедшот или нет
 
         private void Awake()
         {
-            _head.OnShot += () => OnAnyKilled?.Invoke(true);
-            _body.OnShot += () => OnAnyKilled?.Invoke(false);
+            _head.OnShot += () => OnKilled?.Invoke(true);
+            _body.OnShot += () => OnKilled?.Invoke(false);
         }
         
         //TODO Ходить с остановками в случайные места в комнате

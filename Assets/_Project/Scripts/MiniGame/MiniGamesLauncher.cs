@@ -54,7 +54,7 @@ namespace _Project.Scripts.MiniGame
 		private void LaunchMiniGame()
 		{
 			_miniGameStarted = true;
-			_currentMiniGame = _miniGameFactory.CreateMiniGame(MiniGameType.FILL_WITHOUT_EXPLODE);
+			_currentMiniGame = _miniGameFactory.CreateMiniGame(MiniGameType.ZOMBIE_SHOOTER);
 			OnMiniGameLaunched?.Invoke(_currentMiniGame);
 
 			_currentMiniGame.OnFinished += OnMiniGameFinished;

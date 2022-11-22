@@ -3,6 +3,8 @@ using _Project.Scripts.MiniGame.Common;
 using _Project.Scripts.MiniGame.Games.ZombieShooter.Descriptor;
 using _Project.Scripts.MiniGame.Games.ZombieShooter.Model;
 using _Project.Scripts.MiniGame.Games.ZombieShooter.World;
+using _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie;
+using _Project.Scripts.Services.Logger;
 using JetBrains.Annotations;
 using Zenject;
 using Object = UnityEngine.Object;
@@ -12,6 +14,8 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.Logic
 	[UsedImplicitly]
 	public class ZombieShooterMiniGameLogic : IMiniGameLogic
 	{
+		private static readonly ICustomLogger _logger = LoggerFactory.GetLogger<ZombieShooterMiniGameLogic>();
+		
 		[Inject] 
 		private ZombieShooterMiniGameDescriptor _gameDescriptor = null!;
 		[Inject] 
@@ -24,10 +28,10 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.Logic
 		public void StartGame()
 		{
 			_gameWorld = Object.FindObjectOfType<ZombieShooterMiniGameWorld>();
+			foreach (ZombieShooterMiniGameZombie zombie in _gameWorld.Zombies) {
+				zombie.OnKilled += OnZombieKilled;
+			}
 			
-			_gameWorld.OnAnyZombieKilled += OnAnyZombieKilled;
-			
-			//TODO Инициализировать модель данными из дескриптора
 			_gameModel.AmmoCount = _gameDescriptor.StartAmmoCount;
 			_gameModel.AimMoveSpeed = _gameDescriptor.StartAimMoveSpeed;
 			
@@ -41,18 +45,21 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.Logic
 			CheckLose();
 		}
 
-		private void OnAnyZombieKilled(bool headshot)
+		private void OnZombieKilled(bool headshot)
 		{
 			if (headshot) {
 				_gameModel.AmmoCount++;
 			}
 			_gameModel.ZombieKilledCount++;
+			_logger.Debug($"Zombie killed. headshot={headshot}, ammoCount={_gameModel.AmmoCount}, zombieKilledCount={_gameModel.ZombieKilledCount}");
 		}
 		
 		private void Fire()
 		{
 			//TODO Выстрелить в место прицела
 			_gameModel.AmmoCount--;
+			
+			_logger.Debug($"Fire. ammoCount={_gameModel.AmmoCount} ");
 		}
 
 		private void CheckLose()

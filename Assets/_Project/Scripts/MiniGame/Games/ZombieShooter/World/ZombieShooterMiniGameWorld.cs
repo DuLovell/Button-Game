@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie;
 using UnityEngine;
 
@@ -6,23 +7,11 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World
 {
 	public class ZombieShooterMiniGameWorld : MonoBehaviour
 	{
-		public event Action<bool>? OnAnyZombieKilled;
-		
-		private void OnEnable()
-		{
-			ZombieShooterMiniGameZombie.OnAnyKilled += OnAnyKilled;
-		}
+		[field: SerializeField]
+		public Camera TVScreenCamera { get; private set; } = null!;
+		[field: SerializeField]
+		public List<ZombieShooterMiniGameZombie> Zombies { get; private set; } = new();
 
-		private void OnDisable()
-		{
-			ZombieShooterMiniGameZombie.OnAnyKilled -= OnAnyKilled;
-		}
-		
-		private void OnAnyKilled(bool headShot)
-		{
-			OnAnyZombieKilled?.Invoke(headShot);
-		}
-		
-		//TODO Заспавнить зомби
+		//TODO Заспавнить зомби (пока вместо спавна serialize поле)
 	}
 }
