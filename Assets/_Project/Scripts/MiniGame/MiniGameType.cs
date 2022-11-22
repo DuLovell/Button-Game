@@ -2,7 +2,7 @@
 {
 	public enum MiniGameType
 	{
-		FILL_WITH_EXPLODE,
-		FILL_WITHOUT_EXPLODE
+		FILL_WITHOUT_EXPLODE,
+		ZOMBIE_SHOOTER
 	}
 }

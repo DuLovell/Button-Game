@@ -1,6 +1,6 @@
 ﻿using _Project.Scripts.MiniGame.Common;
 
-namespace _Project.Scripts.MiniGame.Games.Test
+namespace _Project.Scripts.MiniGame.Games.Test.Controller
 {
 	public class TestMiniGameController : MiniGameController
 	{
