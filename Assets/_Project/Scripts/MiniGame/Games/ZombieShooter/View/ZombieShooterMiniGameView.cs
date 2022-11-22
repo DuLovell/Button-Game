@@ -1,8 +1,6 @@
 ﻿using _Project.Scripts.MiniGame.Common;
-using _Project.Scripts.MiniGame.Games.ZombieShooter.Model;
 using _Project.Scripts.MiniGame.Games.ZombieShooter.World;
 using UnityEngine;
-using Zenject;
 
 namespace _Project.Scripts.MiniGame.Games.ZombieShooter.View
 {

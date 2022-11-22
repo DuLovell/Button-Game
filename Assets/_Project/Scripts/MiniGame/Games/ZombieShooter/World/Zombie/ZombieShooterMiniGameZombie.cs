@@ -14,9 +14,17 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie
 
         private void Awake()
         {
-            _head.OnShot += () => OnKilled?.Invoke(true);
-            _body.OnShot += () => OnKilled?.Invoke(false);
+            _head.OnShot += () => {
+                OnKilled?.Invoke(true);
+                IsKilled = true;
+            };
+            _body.OnShot += () => {
+                OnKilled?.Invoke(false);
+                IsKilled = true;
+            };
         }
+        
+        public bool IsKilled { get; private set; }
         
         //TODO Ходить с остановками в случайные места в комнате
     }

@@ -1,10 +1,10 @@
-﻿using Animancer;
+﻿using _Project.Scripts.Utilities;
 using RSG;
 using UnityEngine;
 
 namespace _Project.Scripts.MiniGame.Common
 {
-	public class MiniGameAnimator : MonoBehaviour
+	public class MiniGameAnimator : BaseAnimator
 	{
 		[SerializeField]
 		private AnimationClip _showAnimation = null!;
@@ -14,8 +14,6 @@ namespace _Project.Scripts.MiniGame.Common
 		private AnimationClip _waitStartAnimation = null!;
 		[SerializeField]
 		private AnimationClip _idleAnimation = null!;
-
-		private AnimancerComponent _animancer = null!;
 
 		public IPromise PlayShow()
 		{
@@ -35,22 +33,6 @@ namespace _Project.Scripts.MiniGame.Common
 		public void PlayIdle()
 		{
 			Play(_idleAnimation, true).Done();
-		}
-
-		private void Awake()
-		{
-			_animancer = GetComponent<AnimancerComponent>();
-		}
-
-		private IPromise Play(AnimationClip clip, bool looping = false)
-		{
-			AnimancerState state = _animancer.Play(clip);
-			state.Events.NormalizedEndTime = clip.length;
-			Promise promise = new();
-			if (!looping) {
-				state.Events.OnEnd = () => promise.Resolve();
-			}
-			return promise;
 		}
 	}
 }
