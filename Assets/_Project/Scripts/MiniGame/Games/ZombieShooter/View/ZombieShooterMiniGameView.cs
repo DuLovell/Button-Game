@@ -1,6 +1,8 @@
 ﻿using _Project.Scripts.MiniGame.Common;
+using _Project.Scripts.MiniGame.Games.ZombieShooter.Model;
 using _Project.Scripts.MiniGame.Games.ZombieShooter.World;
 using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.MiniGame.Games.ZombieShooter.View
 {
@@ -9,12 +11,12 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.View
 	{
 		[SerializeField]
 		private ZombieShooterMiniGameAimPanel _aimPanel = null!;
-		
+
 		private ZombieShooterMiniGameWorld _gameWorld = null!;
 
 		public void DestroyView()
 		{
-			
+			Destroy(gameObject);
 		}
 
 		private void Start()

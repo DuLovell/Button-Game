@@ -1,5 +1,6 @@
 ﻿using _Project.Scripts.MiniGame.Common;
 using JetBrains.Annotations;
+using UnityEngine;
 
 namespace _Project.Scripts.MiniGame.Games.ZombieShooter.Model
 {
@@ -8,6 +9,7 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.Model
 	{
 		public int AmmoCount;
 		public float AimMoveSpeed;
+		public Vector3 AimPosition;
 		public int ZombieKilledCount;
 		public int RoomClearedCount;
 		

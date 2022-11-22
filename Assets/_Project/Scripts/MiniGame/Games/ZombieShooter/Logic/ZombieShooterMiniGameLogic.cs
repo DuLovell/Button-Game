@@ -6,6 +6,7 @@ using _Project.Scripts.MiniGame.Games.ZombieShooter.World;
 using _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie;
 using _Project.Scripts.Services.Logger;
 using JetBrains.Annotations;
+using UnityEngine;
 using Zenject;
 using Object = UnityEngine.Object;
 
@@ -20,7 +21,7 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.Logic
 		private ZombieShooterMiniGameDescriptor _gameDescriptor = null!;
 		[Inject] 
 		private ZombieShooterMiniGameModel _gameModel = null!;
-		
+
 		public event Action<bool>? OnGameFinished;
 
 		private ZombieShooterMiniGameWorld _gameWorld = null!;
@@ -57,9 +58,13 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.Logic
 		private void Fire()
 		{
 			//TODO Выстрелить в место прицела
+			Ray fireRay = _gameWorld.TVScreenCamera.ScreenPointToRay(_gameModel.AimPosition);
+			if (Physics.Raycast(fireRay, out RaycastHit hit) && hit.collider.TryGetComponent(out IShootable shootable)) {
+				shootable.Shoot();
+			}
 			_gameModel.AmmoCount--;
 			
-			_logger.Debug($"Fire. ammoCount={_gameModel.AmmoCount} ");
+			_logger.Debug($"Fire. aimPosition={_gameModel.AimPosition}, ammoCount={_gameModel.AmmoCount} ");
 		}
 
 		private void CheckLose()
