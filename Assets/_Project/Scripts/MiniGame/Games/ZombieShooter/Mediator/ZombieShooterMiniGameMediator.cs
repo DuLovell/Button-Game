@@ -1,18 +1,18 @@
 ﻿using _Project.Scripts.MainButton;
 using _Project.Scripts.MiniGame.Common;
-using _Project.Scripts.MiniGame.Games.Test.Logic;
+using _Project.Scripts.MiniGame.Games.ZombieShooter.Logic;
 using JetBrains.Annotations;
 using Zenject;
 
-namespace _Project.Scripts.MiniGame.Games.Test.Mediator
+namespace _Project.Scripts.MiniGame.Games.ZombieShooter.Mediator
 {
 	[UsedImplicitly]
-	public class TestMiniGameMediator : IMiniGameMediator
+	public class ZombieShooterMiniGameMediator : IMiniGameMediator
 	{
 		[Inject]
 		private MainButtonController _mainButtonController = null!;
 		[Inject]
-		private TestMiniGameLogic _gameLogic = null!;
+		private ZombieShooterMiniGameLogic _gameLogic = null!;
 
 		public void Activate()
 		{

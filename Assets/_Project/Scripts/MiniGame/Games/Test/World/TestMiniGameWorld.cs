@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace _Project.Scripts.MiniGame.Games.Test
+namespace _Project.Scripts.MiniGame.Games.Test.World
 {
 	public class TestMiniGameWorld : MonoBehaviour
 	{
