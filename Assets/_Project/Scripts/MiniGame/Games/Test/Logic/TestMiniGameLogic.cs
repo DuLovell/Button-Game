@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading;
 using _Project.Scripts.MiniGame.Common;
+using _Project.Scripts.MiniGame.Games.Test.Model;
 using Cysharp.Threading.Tasks;
 using JetBrains.Annotations;
 using Zenject;

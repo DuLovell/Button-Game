@@ -1,7 +1,7 @@
 ﻿using _Project.Scripts.MiniGame.Common;
 using JetBrains.Annotations;
 
-namespace _Project.Scripts.MiniGame.Games.Test
+namespace _Project.Scripts.MiniGame.Games.Test.Model
 {
 	[UsedImplicitly]
 	public class TestMiniGameModel : IMiniGameModel

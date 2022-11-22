@@ -1,4 +1,5 @@
 ﻿using _Project.Scripts.MiniGame.Common;
+using _Project.Scripts.MiniGame.Games.Test.Model;
 using _Project.Scripts.UI;
 using TMPro;
 using UnityEngine;

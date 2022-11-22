@@ -1,6 +1,7 @@
 ﻿using _Project.Scripts.MiniGame.Common;
 using _Project.Scripts.MiniGame.Games;
 using _Project.Scripts.MiniGame.Games.Test;
+using _Project.Scripts.MiniGame.Games.Test.Model;
 using _Project.Scripts.UI;
 using UnityEngine;
 using Zenject;
