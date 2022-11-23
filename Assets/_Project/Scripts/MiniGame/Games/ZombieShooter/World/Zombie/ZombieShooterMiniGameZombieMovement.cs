@@ -12,6 +12,8 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie
 		
 		public void StartWalkingToRandomLocation()
 		{
+			_navMeshAgent.isStopped = false;
+
 			Vector3? location;
 			do {
 				location = GetRandomNavMeshLocation(MOVEMENT_RADIUS);
@@ -22,6 +24,7 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie
 
 		public void StartWalking(Vector3 location)
 		{
+			_navMeshAgent.isStopped = false;
 			_navMeshAgent.SetDestination(location);
 		}
 
