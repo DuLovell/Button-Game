@@ -25,7 +25,7 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie
 			Vector3? location;
 			do {
 				location = GetRandomNavMeshLocation(MOVEMENT_RADIUS);
-			} while (location == null);
+			} while (location == null && Vector3.Distance(ParentTransform.position, (Vector3) location!) > _agent.radius);
 			
 			StartWalking((Vector3) location);
 		}
@@ -56,7 +56,7 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie
 			}
 			Vector3 worldDeltaPosition = _agent.nextPosition - ParentTransform.position;
 			if (worldDeltaPosition.magnitude > _agent.radius) {
-				_agent.nextPosition = ParentTransform.position + 0.5f * worldDeltaPosition;
+				_agent.nextPosition = ParentTransform.position + 0.9f * worldDeltaPosition;
 			}
 		}
 
@@ -75,7 +75,7 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie
 					       : null;
 		}
 
-		public Transform ParentTransform
+		private Transform ParentTransform
 		{
 			get { return transform.parent; }
 		}
@@ -85,7 +85,7 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie
 			get
 			{
 				_logger.Debug($"Agent velocity magnitude={_agent.velocity.magnitude}");
-				return _agent.velocity.magnitude > 0.2f;
+				return _agent.velocity.magnitude > 0.2f && _agent.remainingDistance > _agent.radius;
 			}
 		}
 	}
