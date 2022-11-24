@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading;
 using Cysharp.Threading.Tasks;
 using FSM;
 using Random = UnityEngine.Random;
@@ -12,6 +13,8 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie.StateMachin
 		
 		private readonly ZombieShooterMiniGameZombieAnimator _zombieAnimator;
 		private readonly ZombieShooterMiniGameZombieMovement _zombieMovement;
+		
+		private CancellationTokenSource _tokenSource = null!;
 
 		public ZombieShooterMiniGameZombieIdleState(ZombieShooterMiniGameZombieAnimator zombieAnimator,
 		                                            ZombieShooterMiniGameZombieMovement zombieMovement)
@@ -23,11 +26,15 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie.StateMachin
 		public override void OnEnter()
 		{
 			_zombieAnimator.PlayIdle();
+			
+			_tokenSource = new CancellationTokenSource();
 			MoveToRandomLocationAfterDelay().Forget();
 		}
 
 		public override void OnExit()
 		{
+			_tokenSource.Cancel();
+			_tokenSource.Dispose();
 		}
 
 		public override string Name
@@ -37,7 +44,7 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie.StateMachin
 
 		private async UniTaskVoid MoveToRandomLocationAfterDelay()
 		{
-			await UniTask.Delay(TimeSpan.FromSeconds(Random.Range(BEFORE_MOVE_MIN_DELAY, BEFORE_MOVE_MAX_DELAY)), DelayType.DeltaTime);
+			await UniTask.Delay(TimeSpan.FromSeconds(Random.Range(BEFORE_MOVE_MIN_DELAY, BEFORE_MOVE_MAX_DELAY)), DelayType.DeltaTime, cancellationToken: _tokenSource.Token);
 			_zombieMovement.StartWalkingToRandomLocation();
 		}
 	}

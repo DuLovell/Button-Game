@@ -14,8 +14,8 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie.StateMachin
 
 		private void Awake()
 		{
-			_zombieAnimator = GetComponent<ZombieShooterMiniGameZombieAnimator>();
-			_zombieMovement = GetComponent<ZombieShooterMiniGameZombieMovement>();
+			_zombieAnimator = GetComponentInChildren<ZombieShooterMiniGameZombieAnimator>();
+			_zombieMovement = GetComponentInChildren<ZombieShooterMiniGameZombieMovement>();
 
 			ConfigureStates();
 			

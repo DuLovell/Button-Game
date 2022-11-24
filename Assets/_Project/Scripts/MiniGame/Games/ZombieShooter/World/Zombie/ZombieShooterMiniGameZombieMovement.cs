@@ -1,4 +1,7 @@
-﻿using UnityEngine;
+﻿using System;
+using _Project.Scripts.Services.Logger;
+using Animancer;
+using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
 
@@ -6,13 +9,18 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie
 {
 	public class ZombieShooterMiniGameZombieMovement : MonoBehaviour
 	{
-		private const float MOVEMENT_RADIUS = 3f;
-
-		private NavMeshAgent _navMeshAgent = null!;
+		private static readonly ICustomLogger _logger = LoggerFactory.GetLogger<ZombieShooterMiniGameZombieMovement>();
 		
+		[SerializeField]
+		private NavMeshAgent _agent = null!;
+		
+		private AnimancerComponent _animancerComponent = null!;
+
+		private const float MOVEMENT_RADIUS = 10f;
+
 		public void StartWalkingToRandomLocation()
 		{
-			_navMeshAgent.isStopped = false;
+			_agent.isStopped = false;
 
 			Vector3? location;
 			do {
@@ -24,32 +32,61 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie
 
 		public void StartWalking(Vector3 location)
 		{
-			_navMeshAgent.isStopped = false;
-			_navMeshAgent.SetDestination(location);
+			_agent.isStopped = false;
+			
+			_agent.SetDestination(location);
 		}
 
 		public void Stop()
 		{
-			_navMeshAgent.isStopped = true;
+			_agent.isStopped = true;
 		}
 
 		private void Awake()
 		{
-			_navMeshAgent = GetComponent<NavMeshAgent>();
+			_agent.updatePosition = false;
+			_animancerComponent = GetComponent<AnimancerComponent>();
+		}
+
+		private void Update()
+		{
+			if (!IsWalking) {
+				_agent.nextPosition = ParentTransform.position;
+				return;
+			}
+			Vector3 worldDeltaPosition = _agent.nextPosition - ParentTransform.position;
+			if (worldDeltaPosition.magnitude > _agent.radius) {
+				_agent.nextPosition = ParentTransform.position + 0.5f * worldDeltaPosition;
+			}
+		}
+
+		private void OnAnimatorMove() {
+			Vector3 position = _animancerComponent.Animator.rootPosition;
+			position.y = _agent.nextPosition.y;
+			ParentTransform.position = position;
 		}
 
 		private Vector3? GetRandomNavMeshLocation(float radius) 
 		{
 			Vector3 randomDirection = Random.insideUnitSphere * radius;
-			randomDirection += transform.position;
+			randomDirection += ParentTransform.position;
 			return NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, radius, 1) 
 					       ? hit.position 
 					       : null;
 		}
 
+		public Transform ParentTransform
+		{
+			get { return transform.parent; }
+		}
+
 		public bool IsWalking
 		{
-			get { return _navMeshAgent.velocity.sqrMagnitude > float.Epsilon; }
+			get
+			{
+				_logger.Debug($"Agent velocity magnitude={_agent.velocity.magnitude}");
+				return _agent.velocity.magnitude > 0.2f;
+			}
 		}
 	}
 }

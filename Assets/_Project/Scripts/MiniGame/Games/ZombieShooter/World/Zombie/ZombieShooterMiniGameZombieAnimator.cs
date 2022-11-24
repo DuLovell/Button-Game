@@ -1,4 +1,5 @@
 ﻿using _Project.Scripts.Utilities;
+using Animancer;
 using RSG;
 using UnityEngine;
 
@@ -6,26 +7,26 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie
 {
 	public class ZombieShooterMiniGameZombieAnimator : BaseAnimator
 	{
-		[SerializeField]
-		private AnimationClip _idleAnimation = null!;
-		[SerializeField]
-		private AnimationClip _walkAnimation = null!;
-		[SerializeField]
-		private AnimationClip _deathAnimation = null!;
+		[SerializeReference]
+		private ClipTransitionAsset _idleAnimation = null!;
+		[SerializeReference]
+		private ClipTransitionAsset _walkAnimation = null!;
+		[SerializeReference]
+		private ClipTransitionAsset _deathAnimation = null!;
 		
 		public void PlayIdle()
 		{
-			Play(_idleAnimation, true).Done();
+			Play(_idleAnimation);
 		}
 
 		public void PlayWalk()
 		{
-			Play(_walkAnimation, true).Done();
+			Play(_walkAnimation);
 		}
 
-		public IPromise PlayDeath()
+		public void PlayDeath()
 		{
-			return Play(_deathAnimation);
+			Play(_deathAnimation);
 		}
 	}
 }

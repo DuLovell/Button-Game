@@ -23,5 +23,10 @@ namespace _Project.Scripts.Utilities
 			}
 			return promise;
 		}
+
+		protected void Play(ClipTransitionAsset transitionAsset, bool looping = false)
+		{
+			_animancer.Play(transitionAsset);
+		}
 	}
 }
