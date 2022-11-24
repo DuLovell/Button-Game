@@ -11,6 +11,8 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World
 		public Camera TVScreenCamera { get; private set; } = null!;
 		[field: SerializeField]
 		public List<ZombieShooterMiniGameZombie> Zombies { get; private set; } = new();
+		[field: SerializeField]
+		public Transform WalkingPlaneTransform { get; private set; } = null!;
 
 		//TODO Заспавнить зомби (пока вместо спавна serialize поле)
 	}

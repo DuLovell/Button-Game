@@ -1,5 +1,4 @@
-﻿using _Project.Scripts.Services.Logger;
-using Animancer;
+﻿using Animancer;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
@@ -8,14 +7,16 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie
 {
 	public class ZombieShooterMiniGameZombieMovement : MonoBehaviour
 	{
-		private static readonly ICustomLogger _logger = LoggerFactory.GetLogger<ZombieShooterMiniGameZombieMovement>();
-		
 		[SerializeField]
 		private NavMeshAgent _agent = null!;
 		
 		private AnimancerComponent _animancerComponent = null!;
+		private ZombieShooterMiniGameWorld _gameWorld = null!;
 
 		private const float MOVEMENT_RADIUS = 5f;
+		private const int WALKABLE_AREA_MASK = 1;
+
+		public bool IsWalking { get; private set; }
 
 		public void StartWalkingToRandomLocation()
 		{
@@ -24,6 +25,9 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie
 			Vector3? location;
 			do {
 				location = GetRandomNavMeshLocation(MOVEMENT_RADIUS);
+				if (location != null && Vector3.Distance(ParentTransform.position, (Vector3) location) < _agent.radius) {
+					location = null;
+				}
 			} while (location == null);
 			
 			StartWalking((Vector3) location);
@@ -34,11 +38,14 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie
 			_agent.isStopped = false;
 			
 			_agent.SetDestination(location);
+			IsWalking = true;
 		}
 
 		public void Stop()
 		{
+			_agent.nextPosition = ParentTransform.position;
 			_agent.isStopped = true;
+			IsWalking = false;
 		}
 
 		private void Awake()
@@ -47,16 +54,23 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie
 			_animancerComponent = GetComponent<AnimancerComponent>();
 		}
 
+		private void Start()
+		{
+			_gameWorld = FindObjectOfType<ZombieShooterMiniGameWorld>();
+		}
+
 		private void Update()
 		{
+			if (IsWalking && _agent.remainingDistance < _agent.radius) {
+				Stop();
+			}
 			if (!IsWalking) {
-				_agent.nextPosition = ParentTransform.position;
 				return;
 			}
 			Vector3 worldDeltaPosition = _agent.nextPosition - ParentTransform.position;
-			/*if (worldDeltaPosition.magnitude > _agent.radius) {
+			if (worldDeltaPosition.magnitude > _agent.radius) {
 				_agent.nextPosition = ParentTransform.position + 0.9f * worldDeltaPosition;
-			}*/
+			}
 		}
 
 		private void OnAnimatorMove() {
@@ -68,8 +82,8 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie
 		private Vector3? GetRandomNavMeshLocation(float radius) 
 		{
 			Vector3 randomDirection = Random.insideUnitSphere * radius;
-			randomDirection += ParentTransform.position;
-			return NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, radius, 1) 
+			randomDirection += _gameWorld.WalkingPlaneTransform.position;
+			return NavMesh.SamplePosition(randomDirection, out NavMeshHit hit, radius, WALKABLE_AREA_MASK) 
 					       ? hit.position 
 					       : null;
 		}
@@ -77,15 +91,6 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie
 		private Transform ParentTransform
 		{
 			get { return transform.parent; }
-		}
-
-		public bool IsWalking
-		{
-			get
-			{
-				_logger.Debug($"Agent velocity magnitude={_agent.velocity.magnitude}");
-				return _agent.velocity.magnitude > 0.2f;
-			}
 		}
 	}
 }

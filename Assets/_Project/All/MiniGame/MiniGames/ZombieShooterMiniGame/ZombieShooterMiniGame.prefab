@@ -544,6 +544,7 @@ MonoBehaviour:
   - {fileID: 3253912906190986371}
   - {fileID: 4903351185833316215}
   - {fileID: 6598554780580120098}
+  <WalkingPlaneTransform>k__BackingField: {fileID: 3023795622394233062}
 --- !u!1 &3023795623937795117
 GameObject:
   m_ObjectHideFlags: 0
