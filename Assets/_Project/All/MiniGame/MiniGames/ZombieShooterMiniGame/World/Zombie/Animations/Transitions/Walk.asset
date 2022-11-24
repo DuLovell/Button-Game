@@ -20,7 +20,7 @@ MonoBehaviour:
     - rid: 455494109864656904
       type: {class: RootMotion/MotionTransition, ns: Animancer.Examples.Locomotion, asm: Animancer.Examples}
       data:
-        _FadeDuration: 0.25
+        _FadeDuration: 0.90000004
         _Events:
           _NormalizedTimes:
           - 0.9353448

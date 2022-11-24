@@ -20,7 +20,7 @@ MonoBehaviour:
     - rid: 455494109864656897
       type: {class: ClipTransition, ns: Animancer, asm: Animancer}
       data:
-        _FadeDuration: 0.25
+        _FadeDuration: 1.016
         _Events:
           _NormalizedTimes:
           - 0.9409449
