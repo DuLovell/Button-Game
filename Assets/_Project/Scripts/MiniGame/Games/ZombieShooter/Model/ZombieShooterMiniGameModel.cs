@@ -10,14 +10,14 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.Model
 		public int AmmoCount;
 		public float AimMoveSpeed;
 		public Vector3 AimPosition;
-		public int ZombieKilledCount;
+		public int ZombieLeftCount;
 		public int RoomClearedCount;
 		
 		public void Reset()
 		{
 			AmmoCount = 0;
 			AimMoveSpeed = 0f;
-			ZombieKilledCount = 0;
+			ZombieLeftCount = 0;
 			RoomClearedCount = 0;
 		}
 	}

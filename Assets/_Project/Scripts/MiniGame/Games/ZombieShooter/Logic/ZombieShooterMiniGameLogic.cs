@@ -32,6 +32,7 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.Logic
 			foreach (ZombieShooterMiniGameZombie zombie in _gameWorld.Zombies) {
 				zombie.OnKilled += OnZombieKilled;
 			}
+			_gameModel.ZombieLeftCount = _gameWorld.Zombies.Count;
 			
 			_gameModel.AmmoCount = _gameDescriptor.StartAmmoCount;
 			_gameModel.AimMoveSpeed = _gameDescriptor.StartAimMoveSpeed;
@@ -43,6 +44,7 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.Logic
 		public void OnMainButtonPressed()
 		{
 			Fire();
+			CheckWin();
 			CheckLose();
 		}
 
@@ -51,13 +53,12 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.Logic
 			if (headshot) {
 				_gameModel.AmmoCount++;
 			}
-			_gameModel.ZombieKilledCount++;
-			_logger.Debug($"Zombie killed. headshot={headshot}, ammoCount={_gameModel.AmmoCount}, zombieKilledCount={_gameModel.ZombieKilledCount}");
+			_gameModel.ZombieLeftCount--;
+			_logger.Debug($"Zombie killed. headshot={headshot}, ammoCount={_gameModel.AmmoCount}, zombieKilledCount={_gameModel.ZombieLeftCount}");
 		}
 		
 		private void Fire()
 		{
-			//TODO Выстрелить в место прицела
 			Ray fireRay = _gameWorld.TVScreenCamera.ScreenPointToRay(_gameModel.AimPosition);
 			if (Physics.Raycast(fireRay, out RaycastHit hit) && hit.collider.TryGetComponent(out IShootable shootable)) {
 				shootable.Shoot();
@@ -71,6 +72,13 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.Logic
 		{
 			if (_gameModel.AmmoCount <= 0) {
 				OnGameFinished?.Invoke(false);
+			}
+		}
+
+		private void CheckWin()
+		{
+			if (_gameModel.ZombieLeftCount <= 0) {
+				OnGameFinished?.Invoke(true);
 			}
 		}
 	}

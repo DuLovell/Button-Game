@@ -1,10 +1,14 @@
-﻿
+﻿using _Project.Scripts.MiniGame.Games.ZombieShooter.Logic;
 using _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie.StateMachine.States;
+using Zenject;
 
 namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie.StateMachine
 {
 	public class ZombieShooterMiniGameZombieStateMachine : FSM.StateMachine
 	{
+		[Inject] 
+		private ZombieShooterMiniGameLogic _gameLogic = null!;
+		
 		private ZombieShooterMiniGameZombieAnimator _zombieAnimator = null!;
 		private ZombieShooterMiniGameZombieMovement _zombieMovement = null!;
 
@@ -29,6 +33,21 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie.StateMachin
 		private void Start()
 		{
 			SetState(_idleState); // Переходим в дефолтное состояние
+		}
+
+		private void OnEnable()
+		{
+			_gameLogic.OnGameFinished += OnGameFinished;
+		}
+
+		private void OnDisable()
+		{
+			_gameLogic.OnGameFinished -= OnGameFinished;
+		}
+
+		private void OnGameFinished(bool win)
+		{
+			SetState(_deadState);
 		}
 
 		private void ConfigureStates()
