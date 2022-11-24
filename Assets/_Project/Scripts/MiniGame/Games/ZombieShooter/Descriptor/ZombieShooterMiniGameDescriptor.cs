@@ -22,5 +22,11 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.Descriptor
 		public int InRoomZombieCount { get; private set; }
 		[field: SerializeField]
 		public GameObject ZombiePrefab { get; private set; } = null!;
+
+		[field: Header("Tv Screen")]
+		[field: SerializeField]
+		public float TVScreenWidth { get; private set; }
+		[field: SerializeField] 
+		public float TVScreenHeight { get; private set; }
 	}
 }

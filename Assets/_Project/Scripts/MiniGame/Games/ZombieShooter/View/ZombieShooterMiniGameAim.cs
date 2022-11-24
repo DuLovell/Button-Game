@@ -1,25 +1,35 @@
-﻿using UnityEngine;
+﻿using _Project.Scripts.MiniGame.Games.ZombieShooter.Descriptor;
+using UnityEngine;
+using Zenject;
 
 namespace _Project.Scripts.MiniGame.Games.ZombieShooter.View
 {
 	public class ZombieShooterMiniGameAim : MonoBehaviour
 	{
-		private RectTransform _rectTransform = null!;
+		[Inject] 
+		private ZombieShooterMiniGameDescriptor _gameDescriptor = null!;
 
-		private const float SCREEN_HEIGHT = 25.5f;
-		private const float SCREEN_WIDTH = 25.5f;
-		
-		private float _xSpeed = 10f;
-		private float _ySpeed = 10f;
+		private RectTransform _rectTransform = null!;
 
 		private float _aimHalfWidth;
 		private float _aimHalfHeight;
+		private float _screenWidth;
+		private float _screenHeight;
+		
+		private float _xSpeed;
+		private float _ySpeed;
 
 		private void Awake()
 		{
 			_rectTransform = GetComponent<RectTransform>();
 			_aimHalfWidth = _rectTransform.sizeDelta.x / 2f;
 			_aimHalfHeight = _rectTransform.sizeDelta.y / 2f;
+
+			_screenWidth = _gameDescriptor.TVScreenWidth;
+			_screenHeight = _gameDescriptor.TVScreenHeight;
+			
+			_xSpeed = _gameDescriptor.StartAimMoveSpeed;
+			_ySpeed = _gameDescriptor.StartAimMoveSpeed;
 		}
 
 		private void Update()
@@ -32,22 +42,22 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.View
 			Vector2 resultDirection = _rectTransform.right * _xSpeed + _rectTransform.up * _ySpeed;
 			AnchoredPosition += resultDirection * Time.deltaTime;
 
-			if (AnchoredPosition.x + _aimHalfWidth >= SCREEN_WIDTH) {
+			if (AnchoredPosition.x + _aimHalfWidth >= _screenWidth) {
 				_xSpeed *= -1f;
-				AnchoredPosition = new Vector2(SCREEN_WIDTH - _aimHalfWidth, AnchoredPosition.y);
+				AnchoredPosition = new Vector2(_screenWidth - _aimHalfWidth, AnchoredPosition.y);
 			}
-			else if (AnchoredPosition.x - _aimHalfWidth <= -SCREEN_WIDTH) {
+			else if (AnchoredPosition.x - _aimHalfWidth <= -_screenWidth) {
 				_xSpeed *= -1f;
-				AnchoredPosition = new Vector2(-SCREEN_WIDTH + _aimHalfWidth, AnchoredPosition.y);
+				AnchoredPosition = new Vector2(-_screenWidth + _aimHalfWidth, AnchoredPosition.y);
 			}
 
-			if (AnchoredPosition.y + _aimHalfHeight >= SCREEN_HEIGHT) {
+			if (AnchoredPosition.y + _aimHalfHeight >= _screenHeight) {
 				_ySpeed *= -1f;
-				AnchoredPosition = new Vector2(AnchoredPosition.x, SCREEN_HEIGHT - _aimHalfHeight);
+				AnchoredPosition = new Vector2(AnchoredPosition.x, _screenHeight - _aimHalfHeight);
 			}
-			else if (AnchoredPosition.y - _aimHalfHeight <= -SCREEN_HEIGHT) {
+			else if (AnchoredPosition.y - _aimHalfHeight <= -_screenHeight) {
 				_ySpeed *= -1f;
-				AnchoredPosition = new Vector2(AnchoredPosition.x, -SCREEN_HEIGHT + _aimHalfHeight);
+				AnchoredPosition = new Vector2(AnchoredPosition.x, -_screenHeight + _aimHalfHeight);
 			}
 		}
 
