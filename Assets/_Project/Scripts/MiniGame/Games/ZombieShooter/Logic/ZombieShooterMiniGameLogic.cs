@@ -30,6 +30,7 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.Logic
 		public void StartGame()
 		{
 			_gameWorld = Object.FindObjectOfType<ZombieShooterMiniGameWorld>();
+			_gameWorld.SpawnZombies();
 			foreach (ZombieShooterMiniGameZombie zombie in _gameWorld.Zombies) {
 				zombie.OnKilled += OnZombieKilled;
 			}

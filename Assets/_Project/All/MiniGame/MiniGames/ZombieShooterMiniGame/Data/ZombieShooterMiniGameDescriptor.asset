@@ -16,7 +16,7 @@ MonoBehaviour:
   <HeadshotBonusAmmo>k__BackingField: 1
   <StartAimMoveSpeed>k__BackingField: 10
   <NextRoomAimMoveSpeedDelta>k__BackingField: 2
-  <InRoomZombieCount>k__BackingField: 5
-  <ZombiePrefab>k__BackingField: {fileID: 0}
+  <InRoomZombieCount>k__BackingField: 1
+  <ZombiePrefab>k__BackingField: {fileID: 4904226230168396189, guid: 561b97de3bc4a04428343605dfccd5bc, type: 3}
   <TVScreenWidth>k__BackingField: 25.5
   <TVScreenHeight>k__BackingField: 25.5

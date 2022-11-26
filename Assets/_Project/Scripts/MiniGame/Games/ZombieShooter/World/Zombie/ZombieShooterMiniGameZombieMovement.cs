@@ -52,10 +52,6 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.World.Zombie
 		{
 			_agent.updatePosition = false;
 			_animancerComponent = GetComponent<AnimancerComponent>();
-		}
-
-		private void Start()
-		{
 			_gameWorld = FindObjectOfType<ZombieShooterMiniGameWorld>();
 		}
 
