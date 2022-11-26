@@ -22,10 +22,11 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.Logic
 		[Inject] 
 		private ZombieShooterMiniGameModel _gameModel = null!;
 
+		public event Action? OnGameStarted;
 		public event Action<bool>? OnGameFinished;
 
 		private ZombieShooterMiniGameWorld _gameWorld = null!;
-		
+
 		public void StartGame()
 		{
 			_gameWorld = Object.FindObjectOfType<ZombieShooterMiniGameWorld>();
@@ -38,7 +39,7 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.Logic
 			_gameModel.AimMoveSpeed = _gameDescriptor.StartAimMoveSpeed;
 			
 			//TODO Дать команду миру запустить зомби в комнату
-			//TODO Дать команду View запустить движение прицела
+			OnGameStarted?.Invoke();
 		}
 
 		public void OnMainButtonPressed()

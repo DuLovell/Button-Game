@@ -18,6 +18,7 @@ namespace _Project.Scripts.MiniGame.Games.Test.Logic
 		[Inject]
 		private TestMiniGameModel _gameModel = null!;
 
+		public event Action? OnGameStarted;
 		public event Action<bool>? OnGameFinished;
 
 		private TestMiniGameWorld _gameWorld = null!;

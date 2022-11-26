@@ -18,3 +18,5 @@ MonoBehaviour:
   <NextRoomAimMoveSpeedDelta>k__BackingField: 2
   <InRoomZombieCount>k__BackingField: 5
   <ZombiePrefab>k__BackingField: {fileID: 0}
+  <TVScreenWidth>k__BackingField: 25.5
+  <TVScreenHeight>k__BackingField: 25.5

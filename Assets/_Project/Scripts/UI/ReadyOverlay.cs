@@ -13,6 +13,7 @@ namespace _Project.Scripts.UI
 		{
 			gameObject.SetActive(true);
 			await UniTask.WaitUntil(_mainButtonController.IsButtonTouched);
+			await UniTask.DelayFrame(1); // Пропускаем кадр, чтобы ивент нажатия на кнопку отработал до закрытия оверлея
 			Hide();
 		}
 		

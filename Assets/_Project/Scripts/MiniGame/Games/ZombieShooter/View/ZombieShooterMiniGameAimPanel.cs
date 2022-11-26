@@ -1,5 +1,4 @@
-﻿using System;
-using _Project.Scripts.MiniGame.Games.ZombieShooter.Model;
+﻿using _Project.Scripts.MiniGame.Games.ZombieShooter.Model;
 using _Project.Scripts.MiniGame.Games.ZombieShooter.World;
 using UnityEngine;
 using UnityEngine.UI;
@@ -15,6 +14,16 @@ namespace _Project.Scripts.MiniGame.Games.ZombieShooter.View
 		private ZombieShooterMiniGameModel _gameModel = null!;
 		
 		private ZombieShooterMiniGameWorld _gameWorld = null!;
+
+		public void Show()
+		{
+			gameObject.SetActive(true);
+		}
+
+		public void Hide()
+		{
+			gameObject.SetActive(false);
+		}
 
 		private void Start()
 		{
